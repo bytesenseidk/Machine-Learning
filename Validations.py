@@ -4,7 +4,7 @@ import hashlib
 
 class HashGenerator(object):
     def __init__(self, file):
-        self.file = file
+        self.file = file.replace('"', "")
         self.BUF_SIZE = 65536
         self.file_name = str(file.split("/")[-1])
         try:
@@ -35,8 +35,26 @@ class MD5(HashGenerator):
         return str(self.md5_sum.hexdigest())
 
 
+class SHA1(HashGenerator):
+    def __init__(self, *args, **kwargs):
+        super(SHA1, self).__init__(*args, **kwargs)
+        self.sha1_sum = hashlib.sha1()
+        self.generate()
+
+    def generate(self):
+        with open(self.file_name, "rb") as file:
+            while True:
+                data = file.read(self.BUF_SIZE)
+                if not data:
+                    break
+                self.sha1_sum.update(data)
+
+    def __str__(self):
+        return str(self.sha1_sum.hexdigest())
+
+
 if __name__ == "__main__":
     print("Drag 'n Drop File Here:")
-    file = str(input(r"  >> ")).replace('"', "")
+    file = str(input(r"  >> "))
     test = MD5(file)
     print(test)
