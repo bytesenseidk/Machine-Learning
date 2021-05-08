@@ -79,12 +79,14 @@ class MainWindow(QMainWindow):
         self.log_box.setFont(font1)
         self.log_box.setText("Log")
 
+
     def set_function(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         file_name, _ = QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
         if file_name:
             self.file_entry.setText(file_name)
+
 
     def check_function(self):
         hashes = {"MD5": MD5,
