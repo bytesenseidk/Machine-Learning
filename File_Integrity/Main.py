@@ -58,8 +58,8 @@ class MainWindow(QMainWindow):
         self.hash_choice.setObjectName("hash_choice")
         self.hash_choice.setGeometry(QtCore.QRect(360, 160, 91, 31))
         self.hash_choice.setItemText(0, "MD5")
-        self.hash_choice.setItemText(1, "SHA256")
-        self.hash_choice.setItemText(2, "SHA1")
+        self.hash_choice.setItemText(1, "SHA1")
+        self.hash_choice.setItemText(2, "SHA256")
 
         self.label_result = QtWidgets.QLabel(self)
         self.label_result.setObjectName("label_result")

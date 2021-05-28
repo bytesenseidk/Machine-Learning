@@ -55,7 +55,7 @@ class SHA1(HashGenerator):
 
 class SHA256(HashGenerator):
     def __init__(self, *args, **kwargs):
-        super(SHA1, self).__init__(*args, **kwargs)
+        super(SHA256, self).__init__(*args, **kwargs)
         self.sha256_sum = hashlib.sha256()
         self.generate()
 
