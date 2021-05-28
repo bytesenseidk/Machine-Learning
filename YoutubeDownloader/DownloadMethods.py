@@ -1,6 +1,21 @@
 from __future__ import unicode_literals
 import youtube_dl
 
+
+class MyLogger(object):
+    def debug(self, msg):
+        pass
+
+    def warning(self, msg):
+        pass
+
+    def error(self, msg):
+        print(msg)
+
+def my_hook(d):
+    if d["status"] == "downloading":
+        print(d["_percent_str"])
+
 class Download(object):
     def __init__(self, url, save_path, quality, playlist=False):
         self.url = url
@@ -22,7 +37,9 @@ class Download(object):
                 "preferredcodec"  : "mp3",
                 "preferredquality": self.quality
             }],
+            "logger": MyLogger(),
             "extractaudio": True,
+            "process_hooks": [my_hook]
             "outtmpl"     : self.save_path + "/%(title)s.%(ext)s",
             "noplaylist"  : self.playlist
         }
