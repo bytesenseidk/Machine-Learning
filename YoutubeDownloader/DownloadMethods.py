@@ -16,6 +16,7 @@ def my_hook(d):
     if d["status"] == "downloading":
         print(d["_percent_str"])
 
+
 class Download(object):
     def __init__(self, url, save_path, quality, playlist=False):
         self.url = url
@@ -25,7 +26,6 @@ class Download(object):
                           "Worst": "128"}
         self.quality = self.qualities[quality]
         self.playlist = playlist
-
 
     def mp3_download(self):
         opts = {
@@ -45,7 +45,6 @@ class Download(object):
         }
         download_object = youtube_dl.YoutubeDL(opts)
         download_object.download([self.url])
-
 
     def mp4_download(self):
         opts = {
