@@ -39,7 +39,7 @@ class Download(object):
             }],
             "logger": MyLogger(),
             "extractaudio": True,
-            "process_hooks": [my_hook]
+            "process_hooks": [my_hook],
             "outtmpl"     : self.save_path + "/%(title)s.%(ext)s",
             "noplaylist"  : self.playlist
         }
