@@ -35,7 +35,8 @@ class SystemScanner(object):
     def boot_time(self):
         boot_time_timestamp = psutil.boot_time()
         bt = datetime.fromtimestamp(boot_time_timestamp)
-        return str(f"Boot Time: {bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")
+        data = {"Boot Time": str(f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")}
+        return data
 
 
     def cpu_info(self):
@@ -71,32 +72,32 @@ class SystemScanner(object):
         return data
 
 
-def gpu_info():
-    gpus = GPUtil.getGPUs()
-    data = []
-    gpu_list = {}
-    for gpu in gpus:
-        gpu_list["ID"] = gpu.id
-        gpu_list["Name"] = gpu.name
-        gpu_list["Load"] = f"{gpu.load*100}%"
-        gpu_list["Free"] = f"{gpu.memoryFree}MB"
-        gpu_list["Used"] = f"{gpu.memoryUsed}MB"
-        gpu_list["Total"] = f"{gpu.memoryTotal}MB"
-        gpu_list["Temperature"] = f"{gpu.temperature} °C"
-        gpu_list["UUID"] = gpu.uuid
-        data.append(gpu_list)
-    return data
-    
-# system_info()
-# boot_time()
-# print(cpu_info())
-# cpu_info()
+    def gpu_info(self):
+        gpus = GPUtil.getGPUs()
+        data = {}
+        for gpu in gpus:
+            data["ID"] = gpu.id
+            data["Name"] = gpu.name
+            data["Load"] = f"{gpu.load*100}%"
+            data["Free"] = f"{gpu.memoryFree}MB"
+            data["Used"] = f"{gpu.memoryUsed}MB"
+            data["Total"] = f"{gpu.memoryTotal}MB"
+            data["Temperature"] = f"{gpu.temperature} °C"
+            data["UUID"] = gpu.uuid
+        return data
 
 
-# ram_info()
-# disk_info()
-# network_info()
-print(gpu_info())
+if __name__ == "__main__":
+    scan = SystemScanner()
+    print(f"""
+    {scan.system_info()}
+    {scan.boot_time()}
+    {scan.cpu_info()}
+    {scan.ram_info()}
+    {scan.network_flow()}
+    {scan.gpu_info()}
+    """)
+# scan.disk_info()
 
 
 
