@@ -1,6 +1,7 @@
 import GPUtil
 import psutil
 import platform
+import speedtest
 from datetime import datetime
 
 
@@ -87,8 +88,33 @@ class SystemScanner(object):
         return data
 
 
+class Network_Details(object):
+    def __init__(self):
+        self.scanner = psutil.net_if_addrs()
+        self.speed = speedtest.Speedtest()
+        self.interfaces = self.interface()[0]
+
+    def interface(self):
+        interfaces = []
+        for interface_name, _ in self.scanner.items():
+            interfaces.append(str(interface_name))
+        return interfaces
+
+    def scan(self):
+        data = {"Interface:" : [self.interfaces],
+                "Download:" : str(f"{round(self.speed.download() / 1_000_000, 2)} Mbps"),
+                "Upload:" : str(f"{round(self.speed.upload() / 1_000_000, 2)} Mbps")
+        }
+        return data
+
+    def __str__(self):
+        return str(self.scan())
+
+
+
 if __name__ == "__main__":
     scan = SystemScanner()
+    net = Network_Details()
     print(f"""
     {scan.system_info()}
     {scan.boot_time()}
@@ -96,6 +122,7 @@ if __name__ == "__main__":
     {scan.ram_info()}
     {scan.network_flow()}
     {scan.gpu_info()}
+    {net.scan()}
     """)
 # scan.disk_info()
 
