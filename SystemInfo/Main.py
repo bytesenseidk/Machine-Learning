@@ -98,25 +98,23 @@ class SystemScanner(object):
         }
         return data
     
+
     def network_info(self):
         print("\nWill now do a scan, this won't take long...\n")
         scanner = psutil.net_if_addrs()
         interfaces = []
         for interface_name, _ in scanner.items():
             interfaces.append(str(interface_name))
-        interface = interfaces[0]
         net_io = psutil.net_io_counters()
         speed = speedtest.Speedtest()
-        data = {"Interface:" : interface,
-                "Download:" : str(f"{round(speed.download() / 1_000_000, 2)} Mbps"),
-                "Upload:" : str(f"{round(speed.upload() / 1_000_000, 2)} Mbps"),
-                "Total Bytes Sent": self.get_size(net_io.bytes_sent),
-                "Total Bytes Received": self.get_size(net_io.bytes_recv)
+        data = {
+            "Interface": str(interfaces[0]),
+            "Download": str(f"{round(speed.download() / 1_000_000, 2)} Mbps"),
+            "Upload": str(f"{round(speed.upload() / 1_000_000, 2)} Mbps"),
+            "Total Bytes Sent": str(self.get_size(net_io.bytes_sent)),
+            "Total Bytes Received": str(self.get_size(net_io.bytes_recv))
         }
         return data
-
-    def __str__(self):
-        return str("Returns a dictionary of system details; System, Boot Time, CPU, RAM, Network Speeds & Data Sent & Received, and GPU")
 
 
 
@@ -129,12 +127,13 @@ class GUI(object):
             "ram": spec.ram_info(),
             "gpu": spec.gpu_info(),
             "disk": spec.disk_info(),
-            "net": spec.network_info
+            "net": spec.network_info()
         }
+
         frame = Frame(master)
         frame.grid()
         tabControl = ttk.Notebook(root)
-        tabControl.configure(width=400, height=300)
+        tabControl.configure(width=500, height=300)
 
         self.system_tab = ttk.Frame(tabControl)
         tabControl.add(self.system_tab, text="System")
@@ -160,52 +159,57 @@ class GUI(object):
         tabControl.add(self.net_tab, text="Network")
         tabControl.grid()
 
+        self.style = ttk.Style(frame)
+        self.style.configure("My.TLabel", font=("Arial", 10))
+        self.style.configure("Bold.TLabel", font=("Arial", 10, "bold"))
+        
+
         self.widgets()
 
     def widgets(self):
         # System Tab
-        system_label_frame = LabelFrame(self.system_tab, text="[ SYSTEM ]", width=380, height=300)
+        system_label_frame = LabelFrame(self.system_tab, text="[ SYSTEM ]", width=480, height=300)
         system_label_frame.grid(column=0, row=0)
         system_label_frame.grid_propagate(0)
 
-        system_label = Label(system_label_frame, text="System: ")
+        system_label = Label(system_label_frame, text="System: ", style="My.TLabel")
         system_label.grid(column=0, row=0, sticky=W)
-        system_spec = Label(system_label_frame, text=self.methods["system"]["System"])
+        system_spec = Label(system_label_frame, text=self.methods["system"]["System"], style="Bold.TLabel")
         system_spec.grid(column=1, row=0, sticky=W, padx=10)
 
-        node_label = Label(system_label_frame, text="Node Name: ")
+        node_label = Label(system_label_frame, text="Node Name: ", style="My.TLabel")
         node_label.grid(column=0, row=1, sticky=W)
-        node_spec = Label(system_label_frame, text=self.methods["system"]["Node Name"])
+        node_spec = Label(system_label_frame, text=self.methods["system"]["Node Name"], style="Bold.TLabel")
         node_spec.grid(column=1, row=1, sticky=W, padx=10)
         
-        release_label = Label(system_label_frame, text="Release: ")
+        release_label = Label(system_label_frame, text="Release: ", style="My.TLabel")
         release_label.grid(column=0, row=2, sticky=W)
-        release_spec = Label(system_label_frame, text=self.methods["system"]["Release"])
+        release_spec = Label(system_label_frame, text=self.methods["system"]["Release"], style="Bold.TLabel")
         release_spec.grid(column=1, row=2, sticky=W, padx=10)
 
-        version_label = Label(system_label_frame, text="Version: ")
+        version_label = Label(system_label_frame, text="Version: ", style="My.TLabel")
         version_label.grid(column=0, row=3, sticky=W)
-        version_spec = Label(system_label_frame, text=self.methods["system"]["Version"])
+        version_spec = Label(system_label_frame, text=self.methods["system"]["Version"], style="Bold.TLabel")
         version_spec.grid(column=1, row=3, sticky=W, padx=10)
 
-        architecture_label = Label(system_label_frame, text="Architecture: ")
+        architecture_label = Label(system_label_frame, text="Architecture: ", style="My.TLabel")
         architecture_label.grid(column=0, row=4, sticky=W)
-        architecture_spec = Label(system_label_frame, text=self.methods["system"]["Architecture"])
+        architecture_spec = Label(system_label_frame, text=self.methods["system"]["Architecture"], style="Bold.TLabel")
         architecture_spec.grid(column=1, row=4, sticky=W, padx=10)
 
-        processor_label = Label(system_label_frame, text="Processor: ")
+        processor_label = Label(system_label_frame, text="Processor: ", style="My.TLabel")
         processor_label.grid(column=0, row=5, sticky=W)
-        processor_spec = Label(system_label_frame, text=self.methods["system"]["Processor"])
+        processor_spec = Label(system_label_frame, text=self.methods["system"]["Processor"], style="Bold.TLabel")
         processor_spec.grid(column=1, row=5, sticky=W, padx=10)
 
-        boot_label = Label(system_label_frame, text="Boot Time: ")
+        boot_label = Label(system_label_frame, text="Boot Time: ", style="My.TLabel")
         boot_label.grid(column=0, row=6, sticky=W)
-        boot_spec = Label(system_label_frame, text=self.methods["system"]["Boot Time"])
+        boot_spec = Label(system_label_frame, text=self.methods["system"]["Boot Time"], style="Bold.TLabel")
         boot_spec.grid(column=1, row=6, sticky=W, padx=10)
 
 
         # Central Processing Unit Tab
-        cpu_label_frame = LabelFrame(self.cpu_tab, text="[ CENTRAL PROCESSING UNIT ]", width=380, height=300)
+        cpu_label_frame = LabelFrame(self.cpu_tab, text="[ CENTRAL PROCESSING UNIT ]", width=480, height=300)
         cpu_label_frame.grid(column=0, row=0)
         cpu_label_frame.grid_propagate(0)
 
@@ -241,7 +245,7 @@ class GUI(object):
 
 
         # Random Access Memory Tab
-        ram_label_frame = LabelFrame(self.ram_tab, text="[ RANDOM ACCESS MEMORY ]", width=380, height=300)
+        ram_label_frame = LabelFrame(self.ram_tab, text="[ RANDOM ACCESS MEMORY ]", width=480, height=300)
         ram_label_frame.grid(column=0, row=0)
         ram_label_frame.grid_propagate(0)
 
@@ -267,7 +271,7 @@ class GUI(object):
 
 
         # Graphics Processing Unit Tab
-        gpu_label_frame = LabelFrame(self.gpu_tab, text="[ GRAPHICS PROCESSING UNIT ]", width=380, height=300)
+        gpu_label_frame = LabelFrame(self.gpu_tab, text="[ GRAPHICS PROCESSING UNIT ]", width=480, height=300)
         gpu_label_frame.grid(column=0, row=0)
         gpu_label_frame.grid_propagate(0)
 
@@ -313,7 +317,7 @@ class GUI(object):
 
 
         # Disk Tab
-        disk_label_frame = LabelFrame(self.disk_tab, text="[ Disk ]", width=380, height=300)
+        disk_label_frame = LabelFrame(self.disk_tab, text="[ Disk ]", width=480, height=300)
         disk_label_frame.grid(column=0, row=0)
         disk_label_frame.grid_propagate(0)
 
@@ -363,12 +367,42 @@ class GUI(object):
         disk_t_write_spec.grid(column=1, row=8, sticky=W, padx=10)
 
 
+        # # Network Tab
+        net_label_frame = LabelFrame(self.net_tab, text="[ Network ]", width=480, height=300)
+        net_label_frame.grid(column=0, row=0)
+        net_label_frame.grid_propagate(0)
+
+        net_interface_label = Label(net_label_frame, text="Interface: ")
+        net_interface_label.grid(column=0, row=0, sticky=W)
+        net_interface_spec = Label(net_label_frame, text=self.methods["net"]["Interface"])
+        net_interface_spec.grid(column=1, row=0, sticky=W, padx=10)
+
+        net_download_label = Label(net_label_frame, text="Download: ")
+        net_download_label.grid(column=0, row=1, sticky=W)
+        net_download_spec = Label(net_label_frame, text=self.methods["net"]["Download"])
+        net_download_spec.grid(column=1, row=1, sticky=W, padx=10)
+        
+        net_upload_label = Label(net_label_frame, text="Upload: ")
+        net_upload_label.grid(column=0, row=2, sticky=W)
+        net_upload_spec = Label(net_label_frame, text=self.methods["net"]["Upload"])
+        net_upload_spec.grid(column=1, row=2, sticky=W, padx=10)
+
+        net_t_sent_label = Label(net_label_frame, text="Total Bytes Sent: ")
+        net_t_sent_label.grid(column=0, row=3, sticky=W)
+        net_t_sent_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Sent"])
+        net_t_sent_spec.grid(column=1, row=3, sticky=W, padx=10)
+
+        net_t_recv_label = Label(net_label_frame, text="Total Bytes Received: ")
+        net_t_recv_label.grid(column=0, row=4, sticky=W)
+        net_t_recv_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Received"])
+        net_t_recv_spec.grid(column=1, row=4, sticky=W, padx=10)
+
+
 if __name__ == "__main__":
     root = Tk()
     root.title("System Information")
     GUI(root)
     root.mainloop()
-
 
     # scan = SystemScanner()
     # menu = {
