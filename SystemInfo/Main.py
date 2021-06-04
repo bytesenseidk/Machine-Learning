@@ -203,6 +203,7 @@ class GUI(object):
         boot_spec = Label(system_label_frame, text=self.methods["system"]["Boot Time"])
         boot_spec.grid(column=1, row=6, sticky=W, padx=10)
 
+
         # Central Processing Unit Tab
         cpu_label_frame = LabelFrame(self.cpu_tab, text="[ CENTRAL PROCESSING UNIT ]", width=380, height=300)
         cpu_label_frame.grid(column=0, row=0)
@@ -235,7 +236,7 @@ class GUI(object):
 
         total_usage_label = Label(cpu_label_frame, text="Total Usage: ")
         total_usage_label.grid(column=0, row=5, sticky=W)
-        total_usage_spec = Label(system_label_frame, text=self.methods["cpu"]["Total Usage"])
+        total_usage_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Total Usage"])
         total_usage_spec.grid(column=1, row=5, sticky=W, padx=10)
 
 
@@ -263,6 +264,53 @@ class GUI(object):
         ram_per_label.grid(column=0, row=3, sticky=W)
         ram_per_spec = Label(ram_label_frame, text=self.methods["ram"]["Percentage"])
         ram_per_spec.grid(column=1, row=3, sticky=W, padx=10)
+
+
+        # Graphics Processing Unit Tab
+        gpu_label_frame = LabelFrame(self.gpu_tab, text="[ GRAPHICS PROCESSING UNIT ]", width=380, height=300)
+        gpu_label_frame.grid(column=0, row=0)
+        gpu_label_frame.grid_propagate(0)
+
+        gpu_id_label = Label(gpu_label_frame, text="ID: ")
+        gpu_id_label.grid(column=0, row=0, sticky=W)
+        gpu_id_spec = Label(gpu_label_frame, text=self.methods["gpu"]["ID"])
+        gpu_id_spec.grid(column=1, row=0, sticky=W, padx=10)
+
+        gpu_name_label = Label(gpu_label_frame, text="Name: ")
+        gpu_name_label.grid(column=0, row=1, sticky=W)
+        gpu_name_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Name"])
+        gpu_name_spec.grid(column=1, row=1, sticky=W, padx=10)
+        
+        gpu_load_label = Label(gpu_label_frame, text="Load: ")
+        gpu_load_label.grid(column=0, row=2, sticky=W)
+        gpu_load_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Load"])
+        gpu_load_spec.grid(column=1, row=2, sticky=W, padx=10)
+
+        gpu_free_label = Label(gpu_label_frame, text="Free: ")
+        gpu_free_label.grid(column=0, row=3, sticky=W)
+        gpu_free_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Free"])
+        gpu_free_spec.grid(column=1, row=3, sticky=W, padx=10)
+
+        gpu_used_label = Label(gpu_label_frame, text="Used: ")
+        gpu_used_label.grid(column=0, row=4, sticky=W)
+        gpu_used_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Used"])
+        gpu_used_spec.grid(column=1, row=4, sticky=W, padx=10)
+
+        gpu_total_label = Label(gpu_label_frame, text="Total: ")
+        gpu_total_label.grid(column=0, row=5, sticky=W)
+        gpu_total_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Total"])
+        gpu_total_spec.grid(column=1, row=5, sticky=W, padx=10)
+
+        gpu_temp_label = Label(gpu_label_frame, text="Temp: ")
+        gpu_temp_label.grid(column=0, row=6, sticky=W)
+        gpu_temp_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Temp"])
+        gpu_temp_spec.grid(column=1, row=6, sticky=W, padx=10)
+
+        gpu_uuid_label = Label(gpu_label_frame, text="UUID: ")
+        gpu_uuid_label.grid(column=0, row=7, sticky=W)
+        gpu_uuid_spec = Label(gpu_label_frame, text=self.methods["gpu"]["UUID"])
+        gpu_uuid_spec.grid(column=1, row=7, sticky=W, padx=10)
+
 
 if __name__ == "__main__":
     root = Tk()
