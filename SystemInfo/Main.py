@@ -1,3 +1,4 @@
+import os
 import GPUtil
 import psutil
 import platform
@@ -22,21 +23,17 @@ class SystemScanner(object):
 
     def system_info(self):
         uname = platform.uname()
+        boot_time_timestamp = psutil.boot_time()
+        bt = datetime.fromtimestamp(boot_time_timestamp)
         data = {
             "System":       uname.system,   # Windows
             "Node Name":    uname.node,     # DESKTOP-NJHM05A
             "Release":      uname.release,  # 10
             "Version":      uname.version,  # 10.0.19041
             "architecture": uname.machine,  # AMD64
-            "Processor":    uname.processor # Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+            "Processor":    uname.processor, # Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+            "Boot Time": str(f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")
         }
-        return data
-
-
-    def boot_time(self):
-        boot_time_timestamp = psutil.boot_time()
-        bt = datetime.fromtimestamp(boot_time_timestamp)
-        data = {"Boot Time": str(f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")}
         return data
 
 
@@ -60,15 +57,6 @@ class SystemScanner(object):
             "Available": self.get_size(svmem.available),
             "Used": self.get_size(svmem.used),
             "Percentage": str(f"{svmem.percent}%")
-        }
-        return data
-
-
-    def network_flow(self):
-        net_io = psutil.net_io_counters()
-        data = {
-            "Total Bytes Sent": self.get_size(net_io.bytes_sent),
-            "Total Bytes Received": self.get_size(net_io.bytes_recv)
         }
         return data
 
@@ -115,6 +103,7 @@ class SystemScanner(object):
 
 class Network_Details(object):
     def __init__(self):
+        self.net_io = psutil.net_io_counters()
         self.scanner = psutil.net_if_addrs()
         self.speed = speedtest.Speedtest()
         self.interfaces = self.interface()[0]
@@ -124,11 +113,14 @@ class Network_Details(object):
         for interface_name, _ in self.scanner.items():
             interfaces.append(str(interface_name))
         return interfaces
+    
 
     def scan(self):
         data = {"Interface:" : self.interfaces,
                 "Download:" : str(f"{round(self.speed.download() / 1_000_000, 2)} Mbps"),
-                "Upload:" : str(f"{round(self.speed.upload() / 1_000_000, 2)} Mbps")
+                "Upload:" : str(f"{round(self.speed.upload() / 1_000_000, 2)} Mbps"),
+                "Total Bytes Sent": SystemScanner().get_size(self.net_io.bytes_sent),
+                "Total Bytes Received": SystemScanner().get_size(self.net_io.bytes_recv)
         }
         return data
 
@@ -140,13 +132,37 @@ class Network_Details(object):
 if __name__ == "__main__":
     scan = SystemScanner()
     net = Network_Details()
-    print(f"""
-    {scan.system_info()}
-    {scan.boot_time()}
-    {scan.cpu_info()}
-    {scan.ram_info()}
-    {scan.network_flow()}
-    {scan.gpu_info()}
-    {scan.disk_info()}
-    {net.scan()}
-    """)
+    menu = {
+        1: scan.system_info(),
+        2: scan.cpu_info(),
+        3: scan.ram_info(),
+        4: scan.gpu_info(),
+        5: scan.disk_info(),
+        6: net.scan()
+    }
+    while True:
+        os.system("cls")
+        print(f"[ SYSTEM SCANNER ]\n"
+            "[0] Exit\n"
+            "[1] System Information\n"
+            "[2] Central Processing Unit\n"
+            "[3] Random Access Memory\n"
+            "[4] Graphical Processing Unit\n"
+            "[5] Disk Information\n"
+            "[6] Network Information\n\n")
+        try:
+            selection = int(input("  >> "))
+            if selection == 0:
+                break
+            os.system("cls")
+            for key, value in menu[selection].items():
+                print(f"{key}:\t\t{value}")
+            print("\n")
+            _ = input("Press Enter to continue..")
+            continue 
+        except:
+            os.system("cls")
+            print("\nInvalid input! Try again..\n\n")
+            _ = input("Press Enter to continue..")
+            continue
+
