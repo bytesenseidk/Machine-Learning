@@ -26,12 +26,12 @@ class SystemScanner(object):
         boot_time_timestamp = psutil.boot_time()
         bt = datetime.fromtimestamp(boot_time_timestamp)
         data = {
-            "System":       uname.system,   # Windows
-            "Node Name":    uname.node,     # DESKTOP-NJHM05A
-            "Release":      uname.release,  # 10
-            "Version":      uname.version,  # 10.0.19041
-            "architecture": uname.machine,  # AMD64
-            "Processor":    uname.processor, # Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+            "System":       uname.system, 
+            "Node Name":    uname.node,   
+            "Release":      uname.release,
+            "Version":      uname.version,
+            "architecture": uname.machine,
+            "Processor":    uname.processor,
             "Boot Time": str(f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")
         }
         return data
@@ -71,7 +71,7 @@ class SystemScanner(object):
             data["Free"] = f"{gpu.memoryFree} MB"
             data["Used"] = f"{gpu.memoryUsed} MB"
             data["Total"] = f"{gpu.memoryTotal} MB"
-            data["Temperature"] = f"{gpu.temperature} °C"
+            data["Temp"] = f"{gpu.temperature} °C"
             data["UUID"] = gpu.uuid
         return data
 
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     }
     while True:
         os.system("cls")
-        print(f"[ SYSTEM SCANNER ]\n"
+        print(f"\n[ SYSTEM SCANNER ]\n\n"
             "[0] Exit\n"
             "[1] System Information\n"
             "[2] Central Processing Unit\n"
@@ -150,7 +150,7 @@ if __name__ == "__main__":
             choice = menu[selection]
 
             for key, value in choice().items():
-                print(f"{key}:\t{value}".ljust(20))
+                print(f"| {key:25}| {value}".ljust(5))
             print("\n")
             _ = input("Press Enter to continue..")
             continue 
