@@ -32,7 +32,7 @@ class SystemScanner(object):
             "Node Name":    uname.node,   
             "Release":      uname.release,
             "Version":      uname.version,
-            "architecture": uname.machine,
+            "Architecture": uname.machine,
             "Processor":    uname.processor,
             "Boot Time": str(f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")
         }
@@ -115,13 +115,22 @@ class SystemScanner(object):
         }
         return data
 
-
     def __str__(self):
         return str("Returns a dictionary of system details; System, Boot Time, CPU, RAM, Network Speeds & Data Sent & Received, and GPU")
 
 
+
 class GUI(object):
     def __init__(self, master):
+        spec = SystemScanner()
+        self.methods = {
+            "system": spec.system_info(),
+            "cpu": spec.cpu_info(),
+            "ram": spec.ram_info(),
+            "gpu": spec.gpu_info(),
+            "disk": spec.disk_info(),
+            "net": spec.network_info
+        }
         frame = Frame(master)
         frame.grid()
         tabControl = ttk.Notebook(root)
@@ -154,78 +163,52 @@ class GUI(object):
         self.widgets()
 
     def widgets(self):
-        label_frame = LabelFrame(self.first_tab, text="Label Frame", width=380, height=300)
-        label_frame.grid(column=0, row=0)
-        label_frame.grid_propagate(0)
+        # System Tab
+        system_label_frame = LabelFrame(self.system_tab, text="[ SYSTEM ]", width=380, height=300)
+        system_label_frame.grid(column=0, row=0)
+        system_label_frame.grid_propagate(0)
 
-        label = Label(label_frame, text="Label")
-        label.grid(column=1, row=0)
+        system_label = Label(system_label_frame, text="System: ")
+        system_label.grid(column=0, row=0, sticky=W)
+        system_spec = Label(system_label_frame, text=self.methods["system"]["System"])
+        system_spec.grid(column=1, row=0, sticky=W, padx=10)
 
-        entry = Entry(label_frame, width=45)
-        entry.grid(column=0, row=1, columnspan=3)
-        entry.insert(0, "Entry field")
-
-        radiobutton_1 = Radiobutton(label_frame, text="Radio 1", value=0)
-        radiobutton_1.grid(column=0, row=2)
-        radiobutton_2 = Radiobutton(label_frame, text="Radio 2", value=1)
-        radiobutton_2.grid(column=1, row=2)
-        checkbutton = Checkbutton(label_frame, text="Check")
-        checkbutton.grid(column=2, row=2)
-
-        button = Button(label_frame, text="Button")
-        button.grid(column=0, row=3)
-
-        menubutton = Menubutton(label_frame, text="Menu Button")
-        menubutton.grid(column=1, row=3)
-        menubutton.menu = Menu(menubutton, tearoff=0)
-        menubutton["menu"] =  menubutton.menu
-        menubutton.menu.add_checkbutton(label="first", variable=None)
-        menubutton.menu.add_checkbutton(label="last", variable=None)
-
-        scale = Scale(label_frame, from_=0, to=100, orient=HORIZONTAL)
-        scale.grid(column=0, row=4)
-
-        scrollbar = Scrollbar(label_frame)
-        scrollbar.grid(column=2, row=4)
-
-        list = Listbox(label_frame, yscrollcommand=scrollbar.set, height=5)
-        for line in range(5):
-            list.insert(END, "Listbox Element " + str(line))
-        list.grid(column=2, row=4)
-        scrollbar.config(command=list.yview)
+        node_label = Label(system_label_frame, text="Node Name: ")
+        node_label.grid(column=0, row=1, sticky=W)
+        node_spec = Label(system_label_frame, text=self.methods["system"]["Node Name"])
+        node_spec.grid(column=1, row=1, sticky=W, padx=10)
         
-        optionmenu = OptionMenu(label_frame, self.option, *self.options)
-        optionmenu.grid(column=0, row=5)
+        release_label = Label(system_label_frame, text="Release: ")
+        release_label.grid(column=0, row=2, sticky=W)
+        release_spec = Label(system_label_frame, text=self.methods["system"]["Release"])
+        release_spec.grid(column=1, row=2, sticky=W, padx=10)
 
-        combobox = ttk.Combobox(label_frame, values=self.options)
-        combobox.grid(column=1, row=5)
-        combobox.current(0)
+        version_label = Label(system_label_frame, text="Version: ")
+        version_label.grid(column=0, row=3, sticky=W)
+        version_spec = Label(system_label_frame, text=self.methods["system"]["Version"])
+        version_spec.grid(column=1, row=3, sticky=W, padx=10)
 
-        progress = Progressbar(label_frame, orient=HORIZONTAL, length=100, mode='determinate')
-        progress["value"] = 25
-        progress.grid(column=2, row=5)
+        architecture_label = Label(system_label_frame, text="Architecture: ")
+        architecture_label.grid(column=0, row=4, sticky=W)
+        architecture_spec = Label(system_label_frame, text=self.methods["system"]["Architecture"])
+        architecture_spec.grid(column=1, row=4, sticky=W, padx=10)
 
-        treeview = ttk.Treeview(self.second_tab)
-        treeview["columns"] = ("1","2","3")
-        treeview.column("1", width=25)
-        treeview.column("2", width=25)
-        treeview.column("3", width=25)
-        treeview.heading("1", text ="first") 
-        treeview.heading("2", text ="second") 
-        treeview.heading("3", text ="third")
-        treeview.insert("", 'end', text ="Row 1", values=("Tree", "_", "View")) 
-        treeview.insert("", 'end', text ="Row 2", values=("Tree", "_", "View")) 
-        treeview.insert("", 'end', text ="Row 3", values=("Tree", "_", "View"))
-        treeview.grid(column=0, row=0)
-        treeview.grid_propagate(0)
+        processor_label = Label(system_label_frame, text="Processor: ")
+        processor_label.grid(column=0, row=5, sticky=W)
+        processor_spec = Label(system_label_frame, text=self.methods["system"]["Processor"])
+        processor_spec.grid(column=1, row=5, sticky=W, padx=10)
 
+        boot_label = Label(system_label_frame, text="Boot Time: ")
+        boot_label.grid(column=0, row=6, sticky=W)
+        boot_spec = Label(system_label_frame, text=self.methods["system"]["Boot Time"])
+        boot_spec.grid(column=1, row=6, sticky=W, padx=10)
 
 
 
 if __name__ == "__main__":
     root = Tk()
-    root.title("Tkinter Demo")
-    Demo(root)
+    root.title("System Information")
+    GUI(root)
     root.mainloop()
 
 
