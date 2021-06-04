@@ -203,6 +203,40 @@ class GUI(object):
         boot_spec = Label(system_label_frame, text=self.methods["system"]["Boot Time"])
         boot_spec.grid(column=1, row=6, sticky=W, padx=10)
 
+        # Central Processing Unit Tab
+        cpu_label_frame = LabelFrame(self.cpu_tab, text="[ CENTRAL PROCESSING UNIT ]", width=380, height=300)
+        cpu_label_frame.grid(column=0, row=0)
+        cpu_label_frame.grid_propagate(0)
+
+        core_label = Label(cpu_label_frame, text="Physical Cores: ")
+        core_label.grid(column=0, row=0, sticky=W)
+        core_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Physical Cores"])
+        core_spec.grid(column=1, row=0, sticky=W, padx=10)
+
+        total_label = Label(cpu_label_frame, text="Total Cores: ")
+        total_label.grid(column=0, row=1, sticky=W)
+        total_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Total Cores"])
+        total_spec.grid(column=1, row=1, sticky=W, padx=10)
+        
+        max_freq_label = Label(cpu_label_frame, text="Max Frequency: ")
+        max_freq_label.grid(column=0, row=2, sticky=W)
+        max_freq_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Max Frequency"])
+        max_freq_spec.grid(column=1, row=2, sticky=W, padx=10)
+
+        min_freq_label = Label(cpu_label_frame, text="Min Frequency: ")
+        min_freq_label.grid(column=0, row=2, sticky=W)
+        min_freq_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Min Frequency"])
+        min_freq_spec.grid(column=1, row=2, sticky=W, padx=10)
+
+        cur_freq_label = Label(cpu_label_frame, text="Current Frequency: ")
+        cur_freq_label.grid(column=0, row=4, sticky=W)
+        cur_freq_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Current Frequency"])
+        cur_freq_spec.grid(column=1, row=4, sticky=W, padx=10)
+
+        total_usage_label = Label(cpu_label_frame, text="Total Usage: ")
+        total_usage_label.grid(column=0, row=5, sticky=W)
+        total_usage_spec = Label(system_label_frame, text=self.methods["cpu"]["Total Usage"])
+        total_usage_spec.grid(column=1, row=5, sticky=W, padx=10)
 
 
 if __name__ == "__main__":
