@@ -127,13 +127,13 @@ class GUI(object):
             "ram": spec.ram_info(),
             "gpu": spec.gpu_info(),
             "disk": spec.disk_info(),
-            "net": spec.network_info
+            "net": spec.network_info()
         }
 
         frame = Frame(master)
         frame.grid()
         tabControl = ttk.Notebook(root)
-        tabControl.configure(width=500, height=300)
+        tabControl.configure(width=485, height=285)
 
         self.system_tab = ttk.Frame(tabControl)
         tabControl.add(self.system_tab, text="System")
@@ -177,7 +177,7 @@ class GUI(object):
         system_top_label.grid(column=1, row=0, columnspan=3, sticky=E)
 
 
-        system_label_frame = LabelFrame(self.system_tab, width=480, height=300)
+        system_label_frame = LabelFrame(self.system_tab, width=480, height=240)
         system_label_frame.grid(column=0, row=1)
         system_label_frame.grid_propagate(0)
                 
@@ -226,7 +226,7 @@ class GUI(object):
         cpu_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
 
         
-        cpu_label_frame = LabelFrame(self.cpu_tab, width=480, height=300)
+        cpu_label_frame = LabelFrame(self.cpu_tab, width=480, height=240)
         cpu_label_frame.grid(column=0, row=1)
         cpu_label_frame.grid_propagate(0)
 
@@ -269,7 +269,7 @@ class GUI(object):
         ram_system_top_label = Label(ram_frame_top_label, text="RANDOM ACCESS MEMORY", style="Title.TLabel")
         ram_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
 
-        ram_label_frame = LabelFrame(self.ram_tab, width=480, height=300)
+        ram_label_frame = LabelFrame(self.ram_tab, width=480, height=240)
         ram_label_frame.grid(column=0, row=1)
         ram_label_frame.grid_propagate(0)
 
@@ -303,7 +303,8 @@ class GUI(object):
         gpu_system_top_label = Label(gpu_frame_top_label, text="GRAPHICS PROCESSING UNIT", style="Title.TLabel")
         gpu_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
 
-        gpu_label_frame = LabelFrame(self.gpu_tab, width=480, height=300)
+
+        gpu_label_frame = LabelFrame(self.gpu_tab, width=480, height=240)
         gpu_label_frame.grid(column=0, row=1)
         gpu_label_frame.grid_propagate(0)
 
@@ -356,7 +357,8 @@ class GUI(object):
         disk_system_top_label = Label(disk_frame_top_label, text="DISK", style="Title.TLabel")
         disk_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
 
-        disk_label_frame = LabelFrame(self.disk_tab, width=480, height=300)
+
+        disk_label_frame = LabelFrame(self.disk_tab, width=480, height=240)
         disk_label_frame.grid(column=0, row=1)
         disk_label_frame.grid_propagate(0)
 
@@ -414,35 +416,35 @@ class GUI(object):
         net_system_top_label = Label(net_frame_top_label, text="NETWORK", style="Title.TLabel")
         net_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
 
-        net_label_frame = LabelFrame(self.net_tab, width=480, height=300)
+
+        net_label_frame = LabelFrame(self.net_tab, width=480, height=240)
         net_label_frame.grid(column=0, row=1)
         net_label_frame.grid_propagate(0)
 
+        net_interface_label = Label(net_label_frame, text="Interface: ", style="My.TLabel")
+        net_interface_label.grid(column=0, row=0, sticky=W)
+        net_interface_spec = Label(net_label_frame, text=self.methods["net"]["Interface"], style="Bold.TLabel")
+        net_interface_spec.grid(column=1, row=0, sticky=W, padx=10)
 
-        # net_interface_label = Label(net_label_frame, text="Interface: ", style="My.TLabel")
-        # net_interface_label.grid(column=0, row=0, sticky=W)
-        # net_interface_spec = Label(net_label_frame, text=self.methods["net"]["Interface"], style="Bold.TLabel")
-        # net_interface_spec.grid(column=1, row=0, sticky=W, padx=10)
-
-        # net_download_label = Label(net_label_frame, text="Download: ", style="My.TLabel")
-        # net_download_label.grid(column=0, row=1, sticky=W)
-        # net_download_spec = Label(net_label_frame, text=self.methods["net"]["Download"], style="Bold.TLabel")
-        # net_download_spec.grid(column=1, row=1, sticky=W, padx=10)
+        net_download_label = Label(net_label_frame, text="Download: ", style="My.TLabel")
+        net_download_label.grid(column=0, row=1, sticky=W)
+        net_download_spec = Label(net_label_frame, text=self.methods["net"]["Download"], style="Bold.TLabel")
+        net_download_spec.grid(column=1, row=1, sticky=W, padx=10)
         
-        # net_upload_label = Label(net_label_frame, text="Upload: ", style="My.TLabel")
-        # net_upload_label.grid(column=0, row=2, sticky=W)
-        # net_upload_spec = Label(net_label_frame, text=self.methods["net"]["Upload"], style="Bold.TLabel")
-        # net_upload_spec.grid(column=1, row=2, sticky=W, padx=10)
+        net_upload_label = Label(net_label_frame, text="Upload: ", style="My.TLabel")
+        net_upload_label.grid(column=0, row=2, sticky=W)
+        net_upload_spec = Label(net_label_frame, text=self.methods["net"]["Upload"], style="Bold.TLabel")
+        net_upload_spec.grid(column=1, row=2, sticky=W, padx=10)
 
-        # net_t_sent_label = Label(net_label_frame, text="Total Bytes Sent: ", style="My.TLabel")
-        # net_t_sent_label.grid(column=0, row=3, sticky=W)
-        # net_t_sent_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Sent"], style="Bold.TLabel")
-        # net_t_sent_spec.grid(column=1, row=3, sticky=W, padx=10)
+        net_t_sent_label = Label(net_label_frame, text="Total Bytes Sent: ", style="My.TLabel")
+        net_t_sent_label.grid(column=0, row=3, sticky=W)
+        net_t_sent_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Sent"], style="Bold.TLabel")
+        net_t_sent_spec.grid(column=1, row=3, sticky=W, padx=10)
 
-        # net_t_recv_label = Label(net_label_frame, text="Total Bytes Received: ", style="My.TLabel")
-        # net_t_recv_label.grid(column=0, row=4, sticky=W)
-        # net_t_recv_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Received"], style="Bold.TLabel")
-        # net_t_recv_spec.grid(column=1, row=4, sticky=W, padx=10)
+        net_t_recv_label = Label(net_label_frame, text="Total Bytes Received: ", style="My.TLabel")
+        net_t_recv_label.grid(column=0, row=4, sticky=W)
+        net_t_recv_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Received"], style="Bold.TLabel")
+        net_t_recv_spec.grid(column=1, row=4, sticky=W, padx=10)
 
 
 if __name__ == "__main__":
