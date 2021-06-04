@@ -80,13 +80,35 @@ class SystemScanner(object):
             data["ID"] = gpu.id
             data["Name"] = gpu.name
             data["Load"] = f"{gpu.load*100}%"
-            data["Free"] = f"{gpu.memoryFree}MB"
-            data["Used"] = f"{gpu.memoryUsed}MB"
-            data["Total"] = f"{gpu.memoryTotal}MB"
+            data["Free"] = f"{gpu.memoryFree} MB"
+            data["Used"] = f"{gpu.memoryUsed} MB"
+            data["Total"] = f"{gpu.memoryTotal} MB"
             data["Temperature"] = f"{gpu.temperature} °C"
             data["UUID"] = gpu.uuid
         return data
+
     
+    def disk_info(self):
+        drive = psutil.disk_partitions()[0]
+        disk_io = psutil.disk_io_counters()
+        try:
+            partition_usage = psutil.disk_usage(drive.mountpoint)
+        except PermissionError:
+            pass
+        data = {
+            "Device": drive.device,
+            "Mountpoint": drive.mountpoint,
+            "Filesystem": drive.fstype,
+            "Total Size": self.get_size(partition_usage.total),
+            "Used": self.get_size(partition_usage.used),
+            "Free": self.get_size(partition_usage.free),
+            "Percentage": str(f"{partition_usage.percent}%"),
+            "Total Read": self.get_size(disk_io.read_bytes),
+            "Total Write": self.get_size(disk_io.write_bytes)
+        }
+        return data
+    
+
     def __str__(self):
         return str("Returns a dictionary of system details; System, Boot Time, CPU, RAM, Data Sent and Received, & GPU")
 
@@ -104,7 +126,7 @@ class Network_Details(object):
         return interfaces
 
     def scan(self):
-        data = {"Interface:" : [self.interfaces],
+        data = {"Interface:" : self.interfaces,
                 "Download:" : str(f"{round(self.speed.download() / 1_000_000, 2)} Mbps"),
                 "Upload:" : str(f"{round(self.speed.upload() / 1_000_000, 2)} Mbps")
         }
@@ -125,97 +147,6 @@ if __name__ == "__main__":
     {scan.ram_info()}
     {scan.network_flow()}
     {scan.gpu_info()}
+    {scan.disk_info()}
     {net.scan()}
     """)
-# scan.disk_info()
-
-
-
-""" TODO
-    def disk_info(self):
-        partitions = psutil.disk_partitions()
-        data = {
-
-        }
-        for partition in partitions:
-            print(f"=== Device: {partition.device} ===")
-            print(f"  Mountpoint: {partition.mountpoint}")
-            print(f"  File system type: {partition.fstype}")
-            try:
-                partition_usage = psutil.disk_usage(partition.mountpoint)
-            except PermissionError:
-                # this can be catched due to the disk that
-                # isn't ready
-                continue
-            print(f"  Total Size: {get_size(partition_usage.total)}")
-            print(f"  Used: {get_size(partition_usage.used)}")
-            print(f"  Free: {get_size(partition_usage.free)}")
-            print(f"  Percentage: {partition_usage.percent}%")
-        # get IO statistics since boot
-        disk_io = psutil.disk_io_counters()
-        print(f"Total read: {get_size(disk_io.read_bytes)}")
-        print(f"Total write: {get_size(disk_io.write_bytes)}")
-
-Network details
-"""
-
-
-
-
-
-
-
-
-# import psutil
-# import platform
-# from datetime import datetime
-
-# """ Scale large byte sizes """
-# def get_size(bytes, suffix="B"):
-#     factor = 1024   # bytes
-#     for unit in ["", "K", "M", "G", "T", "P"]:
-#         # Checks if it's above a KB.
-#         if bytes < factor:
-#             return f"{bytes:.2f}{unit}{suffix}"
-#         # Byte conversion
-#         bytes /= factor
-
-
-# def system_informations():
-#     print("="*40, "System Information", "="*40)
-#     uname = platform.uname()
-#     print(f"System: {uname.system}")
-#     print(f"Node Name: {uname.node}")
-#     print(f"Release: {uname.release}")
-#     print(f"Version: {uname.version}")
-#     print(f"Machine: {uname.machine}")
-#     print(f"Processor: {uname.processor}")
-
-# def boot_time():
-#     print("="*40, "Boot Time", "="*40)
-#     boot_time_timestamp = psutil.boot_time()
-#     bt = datetime.fromtimestamp(boot_time_timestamp)
-#     print(f"Boot Time: {bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")
-
-
-# def cpu_info():
-#     print("="*40, "Central Processing Unit", "="*40)
-#     # Amount of cores
-#     print("Physical cores: ", psutil.cpu_count(logical=False))
-#     print("Total cores: ", psutil.cpu_count(logical=True))
-#     # Frequencies
-#     cpufreq = psutil.cpu_freq()
-#     print(f"Max frequency: {cpufreq.max:.2f}Mhz")
-#     print(f"Min frequency: {cpufreq.min:.2f}Mhz")
-#     print(f"Current frequency: {cpufreq.current:.2f}Mhz")
-#     # Usage
-#     print("CPU Usage Per Core:")
-#     for i, percentage in enumerate(psutil.cpu_percent(percpu=True, interval=1)):
-#         print(f"Core {i}: {percentage}%")
-#     print(f"Total CPU Usage: {psutil.cpu_percent()}%")
-
-# if __name__ == "__main__":
-#     system_informations()
-#     boot_time()
-#     cpu_info()
-
