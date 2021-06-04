@@ -19,7 +19,7 @@ class SystemScanner(object):
         factor = 1024
         for unit in ["", "K", "M", "G", "T", "P"]:
             if bytes < factor:
-                return f"{bytes:.2f}{unit}{suffix}"
+                return f"{bytes:.2f} {unit}{suffix}"
             bytes /= factor
 
 
@@ -44,9 +44,9 @@ class SystemScanner(object):
         data = {
             "Physical Cores": psutil.cpu_count(logical=False),
             "Total Cores": psutil.cpu_count(logical=True),
-            "Max Frequency": str(f"{cpufreq.max:.2f}Mhz"),
-            "Min Frequency": str(f"{cpufreq.min:.2f}Mhz"),
-            "Current Frequency": str(f"{cpufreq.current:.2f}Mhz"),
+            "Max Frequency": str(f"{cpufreq.max:.2f} Mhz"),
+            "Min Frequency": str(f"{cpufreq.min:.2f} Mhz"),
+            "Current Frequency": str(f"{cpufreq.current:.2f} Mhz"),
             "Total Usage": str(f"{psutil.cpu_percent()}%")
         }
         return data
@@ -224,9 +224,9 @@ class GUI(object):
         max_freq_spec.grid(column=1, row=2, sticky=W, padx=10)
 
         min_freq_label = Label(cpu_label_frame, text="Min Frequency: ")
-        min_freq_label.grid(column=0, row=2, sticky=W)
+        min_freq_label.grid(column=0, row=3, sticky=W)
         min_freq_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Min Frequency"])
-        min_freq_spec.grid(column=1, row=2, sticky=W, padx=10)
+        min_freq_spec.grid(column=1, row=3, sticky=W, padx=10)
 
         cur_freq_label = Label(cpu_label_frame, text="Current Frequency: ")
         cur_freq_label.grid(column=0, row=4, sticky=W)
@@ -238,6 +238,31 @@ class GUI(object):
         total_usage_spec = Label(system_label_frame, text=self.methods["cpu"]["Total Usage"])
         total_usage_spec.grid(column=1, row=5, sticky=W, padx=10)
 
+
+        # Random Access Memory Tab
+        ram_label_frame = LabelFrame(self.ram_tab, text="[ RANDOM ACCESS MEMORY ]", width=380, height=300)
+        ram_label_frame.grid(column=0, row=0)
+        ram_label_frame.grid_propagate(0)
+
+        ram_total_label = Label(ram_label_frame, text="Total: ")
+        ram_total_label.grid(column=0, row=0, sticky=W)
+        ram_total_spec = Label(ram_label_frame, text=self.methods["ram"]["Total"])
+        ram_total_spec.grid(column=1, row=0, sticky=W, padx=10)
+
+        ram_avail_label = Label(ram_label_frame, text="Available: ")
+        ram_avail_label.grid(column=0, row=1, sticky=W)
+        ram_avail_spec = Label(ram_label_frame, text=self.methods["ram"]["Available"])
+        ram_avail_spec.grid(column=1, row=1, sticky=W, padx=10)
+        
+        ram_used_label = Label(ram_label_frame, text="Used: ")
+        ram_used_label.grid(column=0, row=2, sticky=W)
+        ram_used_spec = Label(ram_label_frame, text=self.methods["ram"]["Used"])
+        ram_used_spec.grid(column=1, row=2, sticky=W, padx=10)
+
+        ram_per_label = Label(ram_label_frame, text="Percentage: ")
+        ram_per_label.grid(column=0, row=3, sticky=W)
+        ram_per_spec = Label(ram_label_frame, text=self.methods["ram"]["Percentage"])
+        ram_per_spec.grid(column=1, row=3, sticky=W, padx=10)
 
 if __name__ == "__main__":
     root = Tk()
