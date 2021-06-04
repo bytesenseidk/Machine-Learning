@@ -86,6 +86,9 @@ class SystemScanner(object):
             data["Temperature"] = f"{gpu.temperature} °C"
             data["UUID"] = gpu.uuid
         return data
+    
+    def __str__(self):
+        return str("Returns a dictionary of system details; System, Boot Time, CPU, RAM, Data Sent and Received, & GPU")
 
 
 class Network_Details(object):
@@ -108,7 +111,7 @@ class Network_Details(object):
         return data
 
     def __str__(self):
-        return str(self.scan())
+        return str("Returns a dictionary of network details; Interface, Download Speed & Upload Speed")
 
 
 
