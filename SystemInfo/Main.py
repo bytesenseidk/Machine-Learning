@@ -96,49 +96,37 @@ class SystemScanner(object):
         }
         return data
     
-
-    def __str__(self):
-        return str("Returns a dictionary of system details; System, Boot Time, CPU, RAM, Data Sent and Received, & GPU")
-
-
-class Network_Details(object):
-    def __init__(self):
-        self.net_io = psutil.net_io_counters()
-        self.scanner = psutil.net_if_addrs()
-        self.speed = speedtest.Speedtest()
-        self.interfaces = self.interface()[0]
-
-    def interface(self):
+    def network_info(self):
+        print("\nWill now do a scan, this won't take long...\n")
+        scanner = psutil.net_if_addrs()
         interfaces = []
-        for interface_name, _ in self.scanner.items():
+        for interface_name, _ in scanner.items():
             interfaces.append(str(interface_name))
-        return interfaces
-    
-
-    def scan(self):
-        data = {"Interface:" : self.interfaces,
-                "Download:" : str(f"{round(self.speed.download() / 1_000_000, 2)} Mbps"),
-                "Upload:" : str(f"{round(self.speed.upload() / 1_000_000, 2)} Mbps"),
-                "Total Bytes Sent": SystemScanner().get_size(self.net_io.bytes_sent),
-                "Total Bytes Received": SystemScanner().get_size(self.net_io.bytes_recv)
+        interface = interfaces[0]
+        net_io = psutil.net_io_counters()
+        speed = speedtest.Speedtest()
+        data = {"Interface:" : interface,
+                "Download:" : str(f"{round(speed.download() / 1_000_000, 2)} Mbps"),
+                "Upload:" : str(f"{round(speed.upload() / 1_000_000, 2)} Mbps"),
+                "Total Bytes Sent": self.get_size(net_io.bytes_sent),
+                "Total Bytes Received": self.get_size(net_io.bytes_recv)
         }
         return data
 
-    def __str__(self):
-        return str("Returns a dictionary of network details; Interface, Download Speed & Upload Speed")
 
+    def __str__(self):
+        return str("Returns a dictionary of system details; System, Boot Time, CPU, RAM, Network Speeds & Data Sent & Received, and GPU")
 
 
 if __name__ == "__main__":
     scan = SystemScanner()
-    net = Network_Details()
     menu = {
-        1: scan.system_info(),
-        2: scan.cpu_info(),
-        3: scan.ram_info(),
-        4: scan.gpu_info(),
-        5: scan.disk_info(),
-        6: net.scan()
+        1: scan.system_info,
+        2: scan.cpu_info,
+        3: scan.ram_info,
+        4: scan.gpu_info,
+        5: scan.disk_info,
+        6: scan.network_info
     }
     while True:
         os.system("cls")
@@ -153,10 +141,16 @@ if __name__ == "__main__":
         try:
             selection = int(input("  >> "))
             if selection == 0:
+                os.system("cls")
+                print("\nThank you for using the app! Have a nice day...\n\n")
+                _ = input("Press Enter to exit..")
                 break
+
             os.system("cls")
-            for key, value in menu[selection].items():
-                print(f"{key}:\t\t{value}")
+            choice = menu[selection]
+
+            for key, value in choice().items():
+                print(f"{key}:\t{value}".ljust(20))
             print("\n")
             _ = input("Press Enter to continue..")
             continue 
