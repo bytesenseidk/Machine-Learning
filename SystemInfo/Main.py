@@ -169,13 +169,18 @@ class GUI(object):
 
     def widgets(self):
         # System Tab
+        frame_top_label = LabelFrame(self.system_tab, width=480, height=50)
+        frame_top_label.grid(column=0, row=0)
+        frame_top_label.grid_propagate(0)
+
+        system_top_label = Label(frame_top_label, text="SYSTEM SPECIFICATIONS", style="Title.TLabel")
+        system_top_label.grid(column=1, row=0, columnspan=3, sticky=E)
+
+
         system_label_frame = LabelFrame(self.system_tab, width=480, height=300)
-        system_label_frame.grid(column=0, row=0)
+        system_label_frame.grid(column=0, row=1)
         system_label_frame.grid_propagate(0)
-
-        system_top_label = Label(system_label_frame, text="[ SYSTEM SPECIFICATIONS ]", style="Title.TLabel")
-        system_top_label.grid(column=1, row=0, sticky=W, padx=30, pady=10)
-
+                
         system_label = Label(system_label_frame, text="System: ", style="My.TLabel")
         system_label.grid(column=0, row=1, sticky=W)
         system_spec = Label(system_label_frame, text=self.methods["system"]["System"], style="Bold.TLabel")
@@ -213,207 +218,230 @@ class GUI(object):
 
 
         # Central Processing Unit Tab
+        cpu_frame_top_label = LabelFrame(self.cpu_tab, width=480, height=50)
+        cpu_frame_top_label.grid(column=0, row=0)
+        cpu_frame_top_label.grid_propagate(0)
+        
+        cpu_system_top_label = Label(cpu_frame_top_label, text="CENTRAL PROCESSING UNIT", style="Title.TLabel")
+        cpu_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
+
+        
         cpu_label_frame = LabelFrame(self.cpu_tab, width=480, height=300)
-        cpu_label_frame.grid(column=0, row=0)
+        cpu_label_frame.grid(column=0, row=1)
         cpu_label_frame.grid_propagate(0)
 
-        cpu_top_label = Label(cpu_label_frame, text="[ CENTRAL PROCESSING UNIT ]", style="Title.TLabel")
-        cpu_top_label.grid(column=1, row=0, sticky=W, padx=30, pady=10)
-
-        cpu_core_label = Label(cpu_label_frame, text="Physical Cores: ")
+        cpu_core_label = Label(cpu_label_frame, text="Physical Cores: ", style="My.TLabel")
         cpu_core_label.grid(column=0, row=1, sticky=W)
-        cpu_core_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Physical Cores"])
+        cpu_core_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Physical Cores"], style="Bold.TLabel")
         cpu_core_spec.grid(column=1, row=1, sticky=W, padx=10)
 
-        cpu_total_label = Label(cpu_label_frame, text="Total Cores: ")
+        cpu_total_label = Label(cpu_label_frame, text="Total Cores: ", style="My.TLabel")
         cpu_total_label.grid(column=0, row=2, sticky=W)
-        cpu_total_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Total Cores"])
+        cpu_total_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Total Cores"], style="Bold.TLabel")
         cpu_total_spec.grid(column=1, row=2, sticky=W, padx=10)
         
-        cpu_max_label = Label(cpu_label_frame, text="Max Frequency: ")
+        cpu_max_label = Label(cpu_label_frame, text="Max Frequency: ", style="My.TLabel")
         cpu_max_label.grid(column=0, row=3, sticky=W)
-        cpu_max_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Max Frequency"])
+        cpu_max_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Max Frequency"], style="Bold.TLabel")
         cpu_max_spec.grid(column=1, row=3, sticky=W, padx=10)
 
-        cpu_min_label = Label(cpu_label_frame, text="Min Frequency: ")
+        cpu_min_label = Label(cpu_label_frame, text="Min Frequency: ", style="My.TLabel")
         cpu_min_label.grid(column=0, row=4, sticky=W)
-        cpu_min_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Min Frequency"])
+        cpu_min_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Min Frequency"], style="Bold.TLabel")
         cpu_min_spec.grid(column=1, row=4, sticky=W, padx=10)
 
-        cpu_cur_label = Label(cpu_label_frame, text="Current Frequency: ")
+        cpu_cur_label = Label(cpu_label_frame, text="Current Frequency: ", style="My.TLabel")
         cpu_cur_label.grid(column=0, row=5, sticky=W)
-        cpu_cur_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Current Frequency"])
+        cpu_cur_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Current Frequency"], style="Bold.TLabel")
         cpu_cur_spec.grid(column=1, row=5, sticky=W, padx=10)
 
-        cpu_t_usage_label = Label(cpu_label_frame, text="Total Usage: ")
+        cpu_t_usage_label = Label(cpu_label_frame, text="Total Usage: ", style="My.TLabel")
         cpu_t_usage_label.grid(column=0, row=6, sticky=W)
-        cpu_t_usage_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Total Usage"])
+        cpu_t_usage_spec = Label(cpu_label_frame, text=self.methods["cpu"]["Total Usage"], style="Bold.TLabel")
         cpu_t_usage_spec.grid(column=1, row=6, sticky=W, padx=10)
 
 
         # Random Access Memory Tab
+        ram_frame_top_label = LabelFrame(self.ram_tab, width=480, height=50)
+        ram_frame_top_label.grid(column=0, row=0)
+        ram_frame_top_label.grid_propagate(0)
+        
+        ram_system_top_label = Label(ram_frame_top_label, text="RANDOM ACCESS MEMORY", style="Title.TLabel")
+        ram_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
+
         ram_label_frame = LabelFrame(self.ram_tab, width=480, height=300)
-        ram_label_frame.grid(column=0, row=0)
+        ram_label_frame.grid(column=0, row=1)
         ram_label_frame.grid_propagate(0)
 
-        ram_top_label = Label(ram_label_frame, text="[ RANDOM ACCESS MEMORY ]", style="Title.TLabel")
-        ram_top_label.grid(column=1, row=0, sticky=W, padx=30, pady=10)
 
-        ram_total_label = Label(ram_label_frame, text="Total: ")
-        ram_total_label.grid(column=0, row=0, sticky=W)
-        ram_total_spec = Label(ram_label_frame, text=self.methods["ram"]["Total"])
-        ram_total_spec.grid(column=1, row=0, sticky=W, padx=10)
+        ram_total_label = Label(ram_label_frame, text="Total: ", style="My.TLabel")
+        ram_total_label.grid(column=0, row=1, sticky=W)
+        ram_total_spec = Label(ram_label_frame, text=self.methods["ram"]["Total"], style="Bold.TLabel")
+        ram_total_spec.grid(column=1, row=1, sticky=W, padx=10)
 
-        ram_avail_label = Label(ram_label_frame, text="Available: ")
-        ram_avail_label.grid(column=0, row=1, sticky=W)
-        ram_avail_spec = Label(ram_label_frame, text=self.methods["ram"]["Available"])
-        ram_avail_spec.grid(column=1, row=1, sticky=W, padx=10)
+        ram_avail_label = Label(ram_label_frame, text="Available: ", style="My.TLabel")
+        ram_avail_label.grid(column=0, row=2, sticky=W)
+        ram_avail_spec = Label(ram_label_frame, text=self.methods["ram"]["Available"], style="Bold.TLabel")
+        ram_avail_spec.grid(column=1, row=2, sticky=W, padx=10)
         
-        ram_used_label = Label(ram_label_frame, text="Used: ")
-        ram_used_label.grid(column=0, row=2, sticky=W)
-        ram_used_spec = Label(ram_label_frame, text=self.methods["ram"]["Used"])
-        ram_used_spec.grid(column=1, row=2, sticky=W, padx=10)
+        ram_used_label = Label(ram_label_frame, text="Used: ", style="My.TLabel")
+        ram_used_label.grid(column=0, row=3, sticky=W)
+        ram_used_spec = Label(ram_label_frame, text=self.methods["ram"]["Used"], style="Bold.TLabel")
+        ram_used_spec.grid(column=1, row=3, sticky=W, padx=10)
 
-        ram_per_label = Label(ram_label_frame, text="Percentage: ")
-        ram_per_label.grid(column=0, row=3, sticky=W)
-        ram_per_spec = Label(ram_label_frame, text=self.methods["ram"]["Percentage"])
-        ram_per_spec.grid(column=1, row=3, sticky=W, padx=10)
+        ram_per_label = Label(ram_label_frame, text="Percentage: ", style="My.TLabel")
+        ram_per_label.grid(column=0, row=4, sticky=W)
+        ram_per_spec = Label(ram_label_frame, text=self.methods["ram"]["Percentage"], style="Bold.TLabel")
+        ram_per_spec.grid(column=1, row=4, sticky=W, padx=10)
 
 
         # Graphics Processing Unit Tab
+        gpu_frame_top_label = LabelFrame(self.gpu_tab, width=480, height=50)
+        gpu_frame_top_label.grid(column=0, row=0)
+        gpu_frame_top_label.grid_propagate(0)
+        
+        gpu_system_top_label = Label(gpu_frame_top_label, text="GRAPHICS PROCESSING UNIT", style="Title.TLabel")
+        gpu_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
+
         gpu_label_frame = LabelFrame(self.gpu_tab, width=480, height=300)
-        gpu_label_frame.grid(column=0, row=0)
+        gpu_label_frame.grid(column=0, row=1)
         gpu_label_frame.grid_propagate(0)
 
-        gpu_top_label = Label(gpu_label_frame, text="[ GRAPHICS PROCESSING UNIT ]", style="Title.TLabel")
-        gpu_top_label.grid(column=1, row=0, sticky=W, padx=30, pady=10)
-
-        gpu_id_label = Label(gpu_label_frame, text="ID: ")
+        gpu_id_label = Label(gpu_label_frame, text="ID: ", style="My.TLabel")
         gpu_id_label.grid(column=0, row=1, sticky=W)
-        gpu_id_spec = Label(gpu_label_frame, text=self.methods["gpu"]["ID"])
+        gpu_id_spec = Label(gpu_label_frame, text=self.methods["gpu"]["ID"], style="Bold.TLabel")
         gpu_id_spec.grid(column=1, row=1, sticky=W, padx=10)
 
-        gpu_name_label = Label(gpu_label_frame, text="Name: ")
+        gpu_name_label = Label(gpu_label_frame, text="Name: ", style="My.TLabel")
         gpu_name_label.grid(column=0, row=2, sticky=W)
-        gpu_name_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Name"])
+        gpu_name_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Name"], style="Bold.TLabel")
         gpu_name_spec.grid(column=1, row=2, sticky=W, padx=10)
         
-        gpu_load_label = Label(gpu_label_frame, text="Load: ")
+        gpu_load_label = Label(gpu_label_frame, text="Load: ", style="My.TLabel")
         gpu_load_label.grid(column=0, row=3, sticky=W)
-        gpu_load_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Load"])
+        gpu_load_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Load"], style="Bold.TLabel")
         gpu_load_spec.grid(column=1, row=3, sticky=W, padx=10)
 
-        gpu_free_label = Label(gpu_label_frame, text="Free: ")
+        gpu_free_label = Label(gpu_label_frame, text="Free: ", style="My.TLabel")
         gpu_free_label.grid(column=0, row=4, sticky=W)
-        gpu_free_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Free"])
+        gpu_free_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Free"], style="Bold.TLabel")
         gpu_free_spec.grid(column=1, row=4, sticky=W, padx=10)
 
-        gpu_used_label = Label(gpu_label_frame, text="Used: ")
+        gpu_used_label = Label(gpu_label_frame, text="Used: ", style="My.TLabel")
         gpu_used_label.grid(column=0, row=5, sticky=W)
-        gpu_used_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Used"])
+        gpu_used_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Used"], style="Bold.TLabel")
         gpu_used_spec.grid(column=1, row=5, sticky=W, padx=10)
 
-        gpu_total_label = Label(gpu_label_frame, text="Total: ")
+        gpu_total_label = Label(gpu_label_frame, text="Total: ", style="My.TLabel")
         gpu_total_label.grid(column=0, row=6, sticky=W)
-        gpu_total_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Total"])
+        gpu_total_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Total"], style="Bold.TLabel")
         gpu_total_spec.grid(column=1, row=6, sticky=W, padx=10)
 
-        gpu_temp_label = Label(gpu_label_frame, text="Temp: ")
+        gpu_temp_label = Label(gpu_label_frame, text="Temp: ", style="My.TLabel")
         gpu_temp_label.grid(column=0, row=7, sticky=W)
-        gpu_temp_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Temp"])
+        gpu_temp_spec = Label(gpu_label_frame, text=self.methods["gpu"]["Temp"], style="Bold.TLabel")
         gpu_temp_spec.grid(column=1, row=7, sticky=W, padx=10)
 
-        gpu_uuid_label = Label(gpu_label_frame, text="UUID: ")
+        gpu_uuid_label = Label(gpu_label_frame, text="UUID: ", style="My.TLabel")
         gpu_uuid_label.grid(column=0, row=8, sticky=W)
-        gpu_uuid_spec = Label(gpu_label_frame, text=self.methods["gpu"]["UUID"])
+        gpu_uuid_spec = Label(gpu_label_frame, text=self.methods["gpu"]["UUID"], style="Bold.TLabel")
         gpu_uuid_spec.grid(column=1, row=8, sticky=W, padx=10)
 
 
         # Disk Tab
+        disk_frame_top_label = LabelFrame(self.disk_tab, width=480, height=50)
+        disk_frame_top_label.grid(column=0, row=0)
+        disk_frame_top_label.grid_propagate(0)
+        
+        disk_system_top_label = Label(disk_frame_top_label, text="DISK", style="Title.TLabel")
+        disk_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
+
         disk_label_frame = LabelFrame(self.disk_tab, width=480, height=300)
-        disk_label_frame.grid(column=0, row=0)
+        disk_label_frame.grid(column=0, row=1)
         disk_label_frame.grid_propagate(0)
 
-        disk_top_label = Label(disk_label_frame, text="[ DISK ]", style="Title.TLabel")
-        disk_top_label.grid(column=1, row=0, sticky=W, padx=30, pady=10)
-
-        disk_device_label = Label(disk_label_frame, text="Device: ")
+        disk_device_label = Label(disk_label_frame, text="Device: ", style="My.TLabel")
         disk_device_label.grid(column=0, row=1, sticky=W)
-        disk_device_spec = Label(disk_label_frame, text=self.methods["disk"]["Device"])
+        disk_device_spec = Label(disk_label_frame, text=self.methods["disk"]["Device"], style="Bold.TLabel")
         disk_device_spec.grid(column=1, row=1, sticky=W, padx=10)
 
-        disk_mount_label = Label(disk_label_frame, text="Mountpoint: ")
+        disk_mount_label = Label(disk_label_frame, text="Mountpoint: ", style="My.TLabel")
         disk_mount_label.grid(column=0, row=2, sticky=W)
-        disk_mount_spec = Label(disk_label_frame, text=self.methods["disk"]["Mountpoint"])
+        disk_mount_spec = Label(disk_label_frame, text=self.methods["disk"]["Mountpoint"], style="Bold.TLabel")
         disk_mount_spec.grid(column=1, row=2, sticky=W, padx=10)
         
-        disk_fs_label = Label(disk_label_frame, text="Filesystem: ")
+        disk_fs_label = Label(disk_label_frame, text="Filesystem: ", style="My.TLabel")
         disk_fs_label.grid(column=0, row=3, sticky=W)
-        disk_fs_spec = Label(disk_label_frame, text=self.methods["disk"]["Filesystem"])
+        disk_fs_spec = Label(disk_label_frame, text=self.methods["disk"]["Filesystem"], style="Bold.TLabel")
         disk_fs_spec.grid(column=1, row=3, sticky=W, padx=10)
 
-        disk_t_size_label = Label(disk_label_frame, text="Total Size: ")
+        disk_t_size_label = Label(disk_label_frame, text="Total Size: ", style="My.TLabel")
         disk_t_size_label.grid(column=0, row=4, sticky=W)
-        disk_t_size_spec = Label(disk_label_frame, text=self.methods["disk"]["Total Size"])
+        disk_t_size_spec = Label(disk_label_frame, text=self.methods["disk"]["Total Size"], style="Bold.TLabel")
         disk_t_size_spec.grid(column=1, row=4, sticky=W, padx=10)
 
-        disk_used_label = Label(disk_label_frame, text="Used: ")
+        disk_used_label = Label(disk_label_frame, text="Used: ", style="My.TLabel")
         disk_used_label.grid(column=0, row=5, sticky=W)
-        disk_used_spec = Label(disk_label_frame, text=self.methods["disk"]["Used"])
+        disk_used_spec = Label(disk_label_frame, text=self.methods["disk"]["Used"], style="Bold.TLabel")
         disk_used_spec.grid(column=1, row=5, sticky=W, padx=10)
 
-        disk_free_label = Label(disk_label_frame, text="Free: ")
+        disk_free_label = Label(disk_label_frame, text="Free: ", style="My.TLabel")
         disk_free_label.grid(column=0, row=6, sticky=W)
-        disk_free_spec = Label(disk_label_frame, text=self.methods["disk"]["Free"])
+        disk_free_spec = Label(disk_label_frame, text=self.methods["disk"]["Free"], style="Bold.TLabel")
         disk_free_spec.grid(column=1, row=6, sticky=W, padx=10)
 
-        disk_per_label = Label(disk_label_frame, text="Percentage: ")
+        disk_per_label = Label(disk_label_frame, text="Percentage: ", style="My.TLabel")
         disk_per_label.grid(column=0, row=7, sticky=W)
-        disk_per_spec = Label(disk_label_frame, text=self.methods["disk"]["Percentage"])
+        disk_per_spec = Label(disk_label_frame, text=self.methods["disk"]["Percentage"], style="Bold.TLabel")
         disk_per_spec.grid(column=1, row=7, sticky=W, padx=10)
 
-        disk_t_read_label = Label(disk_label_frame, text="Total Read: ")
+        disk_t_read_label = Label(disk_label_frame, text="Total Read: ", style="My.TLabel")
         disk_t_read_label.grid(column=0, row=8, sticky=W)
-        disk_t_read_spec = Label(disk_label_frame, text=self.methods["disk"]["Total Read"])
+        disk_t_read_spec = Label(disk_label_frame, text=self.methods["disk"]["Total Read"], style="Bold.TLabel")
         disk_t_read_spec.grid(column=1, row=8, sticky=W, padx=10)
 
-        disk_t_write_label = Label(disk_label_frame, text="Total Write: ")
+        disk_t_write_label = Label(disk_label_frame, text="Total Write: ", style="My.TLabel")
         disk_t_write_label.grid(column=0, row=9, sticky=W)
-        disk_t_write_spec = Label(disk_label_frame, text=self.methods["disk"]["Total Write"])
+        disk_t_write_spec = Label(disk_label_frame, text=self.methods["disk"]["Total Write"], style="Bold.TLabel")
         disk_t_write_spec.grid(column=1, row=9, sticky=W, padx=10)
 
 
         # # Network Tab
+        net_frame_top_label = LabelFrame(self.net_tab, width=480, height=50)
+        net_frame_top_label.grid(column=0, row=0)
+        net_frame_top_label.grid_propagate(0)
+        
+        net_system_top_label = Label(net_frame_top_label, text="NETWORK", style="Title.TLabel")
+        net_system_top_label.grid(column=1, row=0, columnspan=3, sticky=N)
+
         net_label_frame = LabelFrame(self.net_tab, width=480, height=300)
-        net_label_frame.grid(column=0, row=0)
+        net_label_frame.grid(column=0, row=1)
         net_label_frame.grid_propagate(0)
 
-        net_top_label = Label(net_label_frame, text="[ NETWORK ]", style="Title.TLabel")
-        net_top_label.grid(column=1, row=0, sticky=W, padx=30, pady=10)
 
-        # net_interface_label = Label(net_label_frame, text="Interface: ")
+        # net_interface_label = Label(net_label_frame, text="Interface: ", style="My.TLabel")
         # net_interface_label.grid(column=0, row=0, sticky=W)
-        # net_interface_spec = Label(net_label_frame, text=self.methods["net"]["Interface"])
+        # net_interface_spec = Label(net_label_frame, text=self.methods["net"]["Interface"], style="Bold.TLabel")
         # net_interface_spec.grid(column=1, row=0, sticky=W, padx=10)
 
-        # net_download_label = Label(net_label_frame, text="Download: ")
+        # net_download_label = Label(net_label_frame, text="Download: ", style="My.TLabel")
         # net_download_label.grid(column=0, row=1, sticky=W)
-        # net_download_spec = Label(net_label_frame, text=self.methods["net"]["Download"])
+        # net_download_spec = Label(net_label_frame, text=self.methods["net"]["Download"], style="Bold.TLabel")
         # net_download_spec.grid(column=1, row=1, sticky=W, padx=10)
         
-        # net_upload_label = Label(net_label_frame, text="Upload: ")
+        # net_upload_label = Label(net_label_frame, text="Upload: ", style="My.TLabel")
         # net_upload_label.grid(column=0, row=2, sticky=W)
-        # net_upload_spec = Label(net_label_frame, text=self.methods["net"]["Upload"])
+        # net_upload_spec = Label(net_label_frame, text=self.methods["net"]["Upload"], style="Bold.TLabel")
         # net_upload_spec.grid(column=1, row=2, sticky=W, padx=10)
 
-        # net_t_sent_label = Label(net_label_frame, text="Total Bytes Sent: ")
+        # net_t_sent_label = Label(net_label_frame, text="Total Bytes Sent: ", style="My.TLabel")
         # net_t_sent_label.grid(column=0, row=3, sticky=W)
-        # net_t_sent_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Sent"])
+        # net_t_sent_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Sent"], style="Bold.TLabel")
         # net_t_sent_spec.grid(column=1, row=3, sticky=W, padx=10)
 
-        # net_t_recv_label = Label(net_label_frame, text="Total Bytes Received: ")
+        # net_t_recv_label = Label(net_label_frame, text="Total Bytes Received: ", style="My.TLabel")
         # net_t_recv_label.grid(column=0, row=4, sticky=W)
-        # net_t_recv_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Received"])
+        # net_t_recv_spec = Label(net_label_frame, text=self.methods["net"]["Total Bytes Received"], style="Bold.TLabel")
         # net_t_recv_spec.grid(column=1, row=4, sticky=W, padx=10)
 
 
