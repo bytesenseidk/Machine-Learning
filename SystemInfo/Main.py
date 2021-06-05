@@ -163,9 +163,9 @@ class GUI(object):
         self.style.configure("My.TLabel", font=("Arial", 12, "bold"))
         self.style.configure("Bold.TLabel", font=("Arial", 10, "bold"))
         self.style.configure("Title.TLabel", font=("Arial", 15, "bold"))
-        
 
         self.widgets()
+
 
     def widgets(self):
         # System Tab
