@@ -133,7 +133,7 @@ class GUI(object):
         frame = Frame(master)
         frame.grid()
         tabControl = ttk.Notebook(root)
-        tabControl.configure(width=485, height=285)
+        tabControl.configure(width=485, height=290)
 
         self.system_tab = ttk.Frame(tabControl)
         tabControl.add(self.system_tab, text="System")
@@ -450,6 +450,8 @@ class GUI(object):
 if __name__ == "__main__":
     root = Tk()
     root.title("System Information")
+    icon = PhotoImage(file="icon.png")
+    root.iconphoto(False, icon)
     GUI(root)
     root.mainloop()
 
