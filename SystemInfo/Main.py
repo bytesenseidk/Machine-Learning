@@ -34,7 +34,7 @@ class SystemScanner(object):
             "Version":      uname.version,
             "Architecture": uname.machine,
             "Processor":    uname.processor,
-            "Boot Time": str(f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")
+            "Boot Time": str(f"{bt.day}/{bt.month}/{bt.year} {bt.hour}:{bt.minute}:{bt.second}")
         }
         return data
 
