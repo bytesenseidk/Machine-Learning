@@ -7,13 +7,14 @@ from PyQt5.QtCore import QCoreApplication, QObject, QRunnable
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.setGeometry(200, 200, 526, 294)
+        self.setGeometry(200, 200, 526, 220)
         self.setWindowTitle("System Stopper")
         
         self.font_1 = QtGui.QFont()
         self.font_1.setFamily("Microsoft YaHei UI")
-        self.font_1.setBold(True)
+        self.font_1.setBold(False)
         self.font_1.setWeight(75)
+        self.font_1.setPointSize(14)
 
         self.font_2 = QtGui.QFont()
         self.font_2.setFamily("Rockwell Extra Bold")
@@ -46,17 +47,16 @@ class MainWindow(QMainWindow):
 
         self.radio_shutdown = QtWidgets.QRadioButton(self)
         self.radio_shutdown.setObjectName("radio_shutdown")
-        self.radio_shutdown.setGeometry(QtCore.QRect(350, 60, 141, 17))
+        self.radio_shutdown.setGeometry(QtCore.QRect(350, 65, 141, 17))
         self.radio_shutdown.setText("Shutdown")
         self.radio_shutdown.setFont(self.font_1)
-        self.font_1.setPointSize(16)
         
         self.radio_restart = QtWidgets.QRadioButton(self)
         self.radio_restart.setObjectName("radio_restart")
-        self.radio_restart.setGeometry(QtCore.QRect(350, 80, 141, 17))
+        self.radio_restart.setGeometry(QtCore.QRect(350, 85, 141, 17))
         self.radio_restart.setText("Restart")
         self.radio_restart.setFont(self.font_1)
-        self.font_1.setPointSize(16)
+        
         
         self.label_minutes = QtWidgets.QLabel(self)
         self.label_minutes.setObjectName("label_minutes")
@@ -78,6 +78,7 @@ class MainWindow(QMainWindow):
         self.button_activate.setObjectName("button_activate")
         self.button_activate.setGeometry(QtCore.QRect(180, 160, 151, 51))
         self.button_activate.setText("Activate")
+        self.button_activate.setFont(self.font_2)
 
 
 if __name__ == "__main__":
