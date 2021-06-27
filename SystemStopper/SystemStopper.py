@@ -97,7 +97,10 @@ class MainWindow(QMainWindow):
         else:
             method = "Restarting"
             os.system(f"shutdown -r -t {timer_period * 60}")
-        self.label_activation.setText(f"{method} in {timer_period} minutes..")
+        if timer_period == 1:
+            self.label_activation.setText(f"{method} in {timer_period} minute..")
+        else:
+            self.label_activation.setText(f"{method} in {timer_period} minutes..")
 
 
 if __name__ == "__main__":
