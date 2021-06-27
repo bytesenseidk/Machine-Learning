@@ -104,5 +104,6 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.setStyleSheet("background-color: lightgrey;")
+    window.setWindowIcon(QtGui.QIcon("shutdown_logo.ico"))
     window.show()
     sys.exit(app.exec_())
