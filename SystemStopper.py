@@ -42,18 +42,20 @@ class MainWindow(QMainWindow):
         self.font_2.setWeight(50)
         self.entry_minutes.setFont(self.font_2)
         self.entry_minutes.setAlignment(QtCore.Qt.AlignCenter)
-        self.entry_minutes.setText("0")
+        self.entry_minutes.setText("")
+        self.entry_minutes.setPlaceholderText("Default = Now")
         
 
         self.radio_shutdown = QtWidgets.QRadioButton(self)
         self.radio_shutdown.setObjectName("radio_shutdown")
-        self.radio_shutdown.setGeometry(QtCore.QRect(350, 65, 141, 17))
+        self.radio_shutdown.setGeometry(QtCore.QRect(350, 66, 141, 17))
         self.radio_shutdown.setText("Shutdown")
         self.radio_shutdown.setFont(self.font_1)
+        self.radio_shutdown.setChecked(True)
         
         self.radio_restart = QtWidgets.QRadioButton(self)
         self.radio_restart.setObjectName("radio_restart")
-        self.radio_restart.setGeometry(QtCore.QRect(350, 85, 141, 17))
+        self.radio_restart.setGeometry(QtCore.QRect(350, 86, 141, 17))
         self.radio_restart.setText("Restart")
         self.radio_restart.setFont(self.font_1)
         
@@ -79,10 +81,17 @@ class MainWindow(QMainWindow):
         self.button_activate.setGeometry(QtCore.QRect(180, 160, 151, 51))
         self.button_activate.setText("Activate")
         self.button_activate.setFont(self.font_2)
+        self.button_activate.setFocus(True)
+        self.button_activate.clicked.connect(self.activate)
+    
+    def activate(self):
+
+        self.label_activation.setText("Pressed!")
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
+    window.setStyleSheet("background-color: lightgrey;")
     window.show()
     sys.exit(app.exec_())
