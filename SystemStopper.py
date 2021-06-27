@@ -2,7 +2,6 @@ import os
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtCore import QCoreApplication, QObject, QRunnable
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -71,6 +70,7 @@ class MainWindow(QMainWindow):
         self.label_activation = QtWidgets.QLabel(self)
         self.label_activation.setObjectName("label_activation")
         self.label_activation.setGeometry(QtCore.QRect(90, 110, 331, 31))
+        self.font_2.setPointSize(12)
         self.label_activation.setFont(self.font_2)
         self.label_activation.setAlignment(QtCore.Qt.AlignCenter)
         self.label_activation.setText("")
@@ -84,9 +84,20 @@ class MainWindow(QMainWindow):
         self.button_activate.setFocus(True)
         self.button_activate.clicked.connect(self.activate)
     
-    def activate(self):
 
-        self.label_activation.setText("Pressed!")
+    def activate(self):
+        method = None
+        try:
+            timer_period = int(self.entry_minutes.text())
+        except:
+            timer_period = 0
+        if self.radio_shutdown.isChecked():
+            method = "Shutdown"
+            os.system(f"shutdown -s -t {timer_period * 60}")
+        else:
+            method = "Restarting"
+            os.system(f"shutdown -r -t {timer_period * 60}")
+        self.label_activation.setText(f"{method} in {timer_period} minutes..")
 
 
 if __name__ == "__main__":
