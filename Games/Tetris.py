@@ -2,6 +2,12 @@ import os
 import pygame
 import random
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+if not os.path.isfile("scores.txt"):
+    with open("scores.txt", "a") as file:
+        pass
+        
 pygame.font.init()
 
 # GLOBALS VARS
@@ -123,8 +129,7 @@ shapes = [S, Z, I, O, J, L, T]
 shape_colors = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (128, 0, 128)]
 # index 0 - 6 represent shape
 
-
-class Piece(object):  # *
+class Piece(object):
     def __init__(self, x, y, shape):
         self.x = x
         self.y = y
@@ -133,7 +138,7 @@ class Piece(object):  # *
         self.rotation = 0
 
 
-def create_grid(locked_pos={}):  # *
+def create_grid(locked_pos={}):
     grid = [[(0,0,0) for _ in range(10)] for _ in range(20)]
 
     for i in range(len(grid)):
@@ -247,18 +252,20 @@ def draw_next_shape(shape, surface):
 def update_score(nscore):
     score = max_score()
 
-    with open('scores.txt', 'w') as f:
+    with open('scores.txt', 'w') as file:
         if int(score) > nscore:
-            f.write(str(score))
+            file.write(str(score))
         else:
-            f.write(str(nscore))
+            file.write(str(nscore))
 
 
 def max_score():
-    with open('scores.txt', 'r') as f:
-        lines = f.readlines()
-        score = lines[0].strip()
-
+    try:
+        with open('scores.txt', 'r') as file:
+            lines = file.readlines()
+            score = lines[0].strip()
+    except:
+        score = "0"
     return score
 
 
@@ -297,7 +304,7 @@ def draw_window(surface, grid, score=0, last_score = 0):
     #pygame.display.update()
 
 
-def main(win):  # *
+def main(win):
     last_score = max_score()
     locked_positions = {}
     grid = create_grid(locked_positions)
@@ -381,7 +388,7 @@ def main(win):  # *
             update_score(score)
 
 
-def main_menu(win):  # *
+def main_menu(win):
     run = True
     while run:
         win.fill((0,0,0))
