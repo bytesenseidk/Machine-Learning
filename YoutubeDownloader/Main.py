@@ -123,7 +123,6 @@ class MainWindow(QMainWindow):
         if file_name:
             self.input_path.setText(file_name)
 
-
     def download_button(self):
         url = self.input_url.text()
         save_path = self.input_path.text()
@@ -133,68 +132,35 @@ class MainWindow(QMainWindow):
         download.start()
 
     def download_thread(self, url, save_path, quality):
+        playlist = True
+        video_format = False
         if self.radio_single.isChecked():
             playlist = False
-        else:
-            playlist = True
         if self.check_video.isChecked():
-            Download(url, save_path, quality, playlist).mp4_download()
-        else:
-            Download(url, save_path, quality, playlist).mp3_download()
+            video_format = True
+
+        Download(url, save_path, quality, video_format, playlist).download()
+        
         self.input_url.setText("")
         self.label_done.setText("Download Done!")
 
 
-class MyLogger(object):
-    def debug(self, msg):
-        pass
-
-    def warning(self, msg):
-        pass
-
-    def error(self, msg):
-        print(msg)
-
-def my_hook(d):
-    if d["status"] == "downloading":
-        print(d["_percent_str"])
-
-
 class Download(object):
-    def __init__(self, url, save_path, quality, playlist=False):
+    def __init__(self, url, save_path, quality, video_format, playlist=False):
         self.url = url
         self.save_path = save_path
         self.qualities = {"Best": "1411",
                           "Semi": "320",
                           "Worst": "128"}
+        self.video_format = video_format
         self.quality = self.qualities[quality]
         self.playlist = playlist
-    
+        self.song_name = ""
 
-    def mp3_download(self):
-        opts = {
-            "verbose": False,
-            "fixup"  : "detect_or_warn",
-            "format" : "bestaudio/best",
-            "postprocessors" : [{
-                "key": "FFmpegExtractAudio",
-                "preferredcodec"  : "mp3",
-                "preferredquality": self.quality
-            }],
-            "logger": MyLogger(),
-            "extractaudio": True,
-            "process_hooks": [my_hook],
-            "outtmpl"     : self.save_path + "/%(title)s.%(ext)s",
-            "noplaylist"  : self.playlist
-        }
-        download_object = youtube_dl.YoutubeDL(opts)
-        info = download_object.extract_info(self.url, download=False)
-        # print(info.get('size', None))
-        download_object.download([self.url])
-        
 
-    def mp4_download(self):
-        opts = {
+    @property
+    def video_opts(self):
+        return {
             "verbose": False,
             "fixup"  : "detect_or_warn",
             "format" : "bestaudio/best",
@@ -205,8 +171,39 @@ class Download(object):
             "outtmpl"     : self.save_path + "/%(title)s.%(ext)s",
             "noplaylist"  : self.playlist
         }
-        download_object = youtube_dl.YoutubeDL(opts)
-        download_object.download([self.url])
+    
+    @property
+    def song_opts(self):
+        return {
+            "verbose": False,
+            "fixup"  : "detect_or_warn",
+            "format" : "bestaudio/best",
+            "postprocessors" : [{
+                "key": "FFmpegExtractAudio",
+                "preferredcodec"  : "mp3",
+                "preferredquality": self.quality
+            }],
+            "extractaudio": True,
+            "outtmpl"     : self.save_path + "/%(title)s.%(ext)s",
+            "noplaylist"  : self.playlist
+        }
+    
+
+    def download(self):
+        if self.video_format:
+            download_object = youtube_dl.YoutubeDL(self.video_opts)
+        else:
+            download_object = youtube_dl.YoutubeDL(self.song_opts)
+        return download_object.download([self.url])
+
+    
+    
+    # @staticmethod
+    # def video_info(self, url):
+    #     info = download_object.extract_info(self.url, download=False)
+    #     # print(info.get('size', None))
+    #     self.song_name = info.get('size', None)
+
 
 
 if __name__ == "__main__":
