@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import os
 import sys
+import threading
 import youtube_dl
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
@@ -15,6 +16,7 @@ class MainWindow(QMainWindow):
         self.font = QtGui.QFont()
         self.font.setFamily("Leelawadee UI")
         self.std_download_path = str(os.path.join(os.path.expanduser("~"), "Downloads"))
+        # self.icon_path = os.path.dirname(os.path.realpath(__file__)) + "\\"
         self.initUI()
 
 
@@ -126,6 +128,11 @@ class MainWindow(QMainWindow):
         url = self.input_url.text()
         save_path = self.input_path.text()
         quality = self.combo_quality.currentText()
+        download = threading.Thread(target=self.download_thread, args=(url, save_path, quality))
+        self.label_done.setText("Downloading...")
+        download.start()
+
+    def download_thread(self, url, save_path, quality):
         if self.radio_single.isChecked():
             playlist = False
         else:
@@ -202,5 +209,5 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
+    window.setWindowIcon(QtGui.QIcon("logo.ico"))
     sys.exit(app.exec_())
-
