@@ -128,7 +128,7 @@ class MainWindow(QMainWindow):
         url = self.input_url.text()
         save_path = self.input_path.text()
         quality = self.combo_quality.currentText()
-        download = threading.Thread(target=self.download_thread, args=(url, save_path, quality))
+        download = threading.Thread(target=self.download_thread, args=(url, save_path, quality), daemon=True)
         self.label_done.setText("Downloading...")
         download.start()
 
@@ -169,6 +169,7 @@ class Download(object):
                           "Worst": "128"}
         self.quality = self.qualities[quality]
         self.playlist = playlist
+    
 
     def mp3_download(self):
         opts = {
@@ -187,7 +188,10 @@ class Download(object):
             "noplaylist"  : self.playlist
         }
         download_object = youtube_dl.YoutubeDL(opts)
+        info = download_object.extract_info(self.url, download=False)
+        # print(info.get('size', None))
         download_object.download([self.url])
+        
 
     def mp4_download(self):
         opts = {
