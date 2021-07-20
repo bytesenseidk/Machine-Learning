@@ -194,16 +194,11 @@ class Download(object):
             download_object = youtube_dl.YoutubeDL(self.video_opts)
         else:
             download_object = youtube_dl.YoutubeDL(self.song_opts)
+        
+        info = download_object.extract_info(self.url, download=False)
+        self.song_name = info.get('size', None)
+
         return download_object.download([self.url])
-
-    
-    
-    # @staticmethod
-    # def video_info(self, url):
-    #     info = download_object.extract_info(self.url, download=False)
-    #     # print(info.get('size', None))
-    #     self.song_name = info.get('size', None)
-
 
 
 if __name__ == "__main__":
