@@ -88,7 +88,7 @@ class MainWindow(QMainWindow):
 
         self.label_done = QtWidgets.QLabel(self)
         self.label_done.setObjectName("label_done")
-        self.label_done.setGeometry(QtCore.QRect(210, 240, 171, 31))
+        self.label_done.setGeometry(QtCore.QRect(10, 240, 590, 31))
         self.font.setPointSize(14)
         self.font.setBold(False)
         self.font.setWeight(50)
@@ -128,7 +128,6 @@ class MainWindow(QMainWindow):
         save_path = self.input_path.text()
         quality = self.combo_quality.currentText()
         download = threading.Thread(target=self.download_thread, args=(url, save_path, quality), daemon=True)
-        self.label_done.setText("Downloading...")
         download.start()
 
     def download_thread(self, url, save_path, quality):
@@ -155,7 +154,6 @@ class Download(object):
         self.video_format = video_format
         self.quality = self.qualities[quality]
         self.playlist = playlist
-        self.song_name = ""
 
 
     @property
@@ -196,7 +194,8 @@ class Download(object):
             download_object = youtube_dl.YoutubeDL(self.song_opts)
         
         info = download_object.extract_info(self.url, download=False)
-        self.song_name = info.get('size', None)
+        song_name = info.get('title', None)
+        window.label_done.setText(song_name)
 
         return download_object.download([self.url])
 
