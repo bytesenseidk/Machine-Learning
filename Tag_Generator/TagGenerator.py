@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
         self.font_tags.setWeight(75)
 
         self.initUI()
-        
+
         self.tag_list = self.read_tags()
         self.lcd_tagCount.display(int(len(self.tag_list)))
 
@@ -175,7 +175,6 @@ class MainWindow(QMainWindow):
     def copy_tags(self):
         tags = self.text_tags.toPlainText()
         win32clipboard.OpenClipboard()
-        data = str(win32clipboard.GetClipboardData())
         win32clipboard.EmptyClipboard()
         win32clipboard.SetClipboardText(tags)
         win32clipboard.CloseClipboard()
