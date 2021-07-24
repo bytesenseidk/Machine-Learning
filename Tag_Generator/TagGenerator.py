@@ -24,16 +24,7 @@ class MainWindow(QMainWindow):
         self.font_tags.setWeight(75)
 
         self.initUI()
-        self.tags = {
-            "python": False,
-            "programming": False,
-            "pythonprogramming": False,
-            "machinelearning": False,
-            "gaming": False,
-            "hacking": False,
-            "python_genius": False,
-
-        }
+        
         self.tag_list = self.read_tags()
         self.lcd_tagCount.display(int(len(self.tag_list)))
 
