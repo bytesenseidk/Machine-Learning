@@ -188,6 +188,7 @@ class MainWindow(QMainWindow):
         win32clipboard.EmptyClipboard()
         win32clipboard.SetClipboardText(tags)
         win32clipboard.CloseClipboard()
+        self.text_tags.setText("Tags copied to clipboard!")
     
 
     def add_tags(self):
