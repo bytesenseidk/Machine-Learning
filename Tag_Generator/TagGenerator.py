@@ -195,7 +195,7 @@ class MainWindow(QMainWindow):
         except Exception as E:
             return E
         try:
-            with open("tags.txt", "w+") as file:
+            with open("tags.txt", "a+") as file:
                 for word in file.read().split(" "):
                     for added in tags:
                         if word == added:
