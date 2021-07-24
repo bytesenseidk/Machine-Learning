@@ -1,4 +1,4 @@
-import sys, os, random
+import sys, os, random, win32clipboard
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from pathlib import Path
@@ -11,8 +11,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Tag Generator")
         
         os.chdir(os.path.dirname(os.path.realpath(__file__)))
-        # self.setWindowIcon("icon.ico")
-
+        self.setWindowIcon(QtGui.QIcon("icon.ico"))
+        
         self.font_element = QtGui.QFont()
         self.font_element.setPointSize(16)
         self.font_element.setBold(True)
@@ -52,12 +52,12 @@ class MainWindow(QMainWindow):
         self.button_generate.setText("Generate")
         self.button_generate.clicked.connect(self.generate)
         
-        self.button_show = QtWidgets.QPushButton(self)
-        self.button_show.setObjectName("button_show")
-        self.button_show.setGeometry(QtCore.QRect(440, 100, 131, 81))
-        self.button_show.setFont(self.font_element)
-        self.button_show.setText("Copy Tags")
-        self.button_show.clicked.connect(self.show_all)
+        self.button_copy = QtWidgets.QPushButton(self)
+        self.button_copy.setObjectName("button_copy")
+        self.button_copy.setGeometry(QtCore.QRect(440, 100, 131, 81))
+        self.button_copy.setFont(self.font_element)
+        self.button_copy.setText("Copy Tags")
+        self.button_copy.clicked.connect(self.copy_tags)
         
         self.label_tagCount = QtWidgets.QLabel(self)
         self.label_tagCount.setObjectName("label_tagCount")
@@ -146,7 +146,7 @@ class MainWindow(QMainWindow):
             self.check_gaming, self.check_machinelearning, self.check_python, self.check_hacking]
         for tag in tags:
             if tag.isChecked():
-                name = "#" + str(tag.text())#.strip("check_")
+                name = "#" + str(tag.text())
                 add_tags.append(name)
         return add_tags
         
@@ -181,11 +181,13 @@ class MainWindow(QMainWindow):
         self.text_tags.setText(result)
     
 
-    def show_all(self):
-        result = ""
-        for word in self.tag_list:
-            result += word + " "
-        self.text_tags.setText(result)
+    def copy_tags(self):
+        tags = self.text_tags.toPlainText()
+        win32clipboard.OpenClipboard()
+        data = str(win32clipboard.GetClipboardData())
+        win32clipboard.EmptyClipboard()
+        win32clipboard.SetClipboardText(tags)
+        win32clipboard.CloseClipboard()
     
 
     def add_tags(self):
