@@ -1,7 +1,6 @@
 import sys, os, random
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLCDNumber, QFileDialog, QInputDialog
-from PyQt5.QtCore import QCoreApplication, QObject, QRunnable, QThread, QThreadPool, pyqtSignal
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from pathlib import Path
 
 
