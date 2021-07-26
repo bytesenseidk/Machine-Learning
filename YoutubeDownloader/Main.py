@@ -16,7 +16,8 @@ class MainWindow(QMainWindow):
         self.font = QtGui.QFont()
         self.font.setFamily("Leelawadee UI")
         self.std_download_path = str(os.path.join(os.path.expanduser("~"), "Downloads"))
-        # self.icon_path = os.path.dirname(os.path.realpath(__file__)) + "\\"
+        os.chdir(os.path.dirname(os.path.realpath(__file__)))
+        self.setWindowIcon(QtGui.QIcon("logo.ico"))
         self.initUI()
 
 
@@ -204,5 +205,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
-    window.setWindowIcon(QtGui.QIcon("logo.ico"))
     sys.exit(app.exec_())
