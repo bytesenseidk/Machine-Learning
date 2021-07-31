@@ -1,7 +1,10 @@
+import os
 import sys
 import pygame
 import random
+from pygame.locals import *
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 800
@@ -144,13 +147,3 @@ while run:
     screen.fill(BLACK)
 
 pygame.quit()
-
-
-
-"""
-TODO:
-    give enemies more life
-    add different enemies
-    add highscore
-    add upgrades for player
-"""
