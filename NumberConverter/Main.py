@@ -1,38 +1,30 @@
-# -*- coding: utf-8 -*-
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QWidget, QAction, QTabWidget,QVBoxLayout
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import pyqtSlot
 
-################################################################################
-## Form generated from reading UI file 'GraphicsgMlvud.ui'
-##
-## Created by: Qt User Interface Compiler version 5.14.1
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.setGeometry(200, 200, 802, 296)
+        self.setWindowTitle("Number System Converter")
+        self.initUI()
 
-from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-    QRect, QSize, QUrl, Qt)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
-    QRadialGradient)
-from PySide2.QtWidgets import *
-
-
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        if MainWindow.objectName():
-            MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(802, 296)
-        self.centralwidget = QWidget(MainWindow)
-        self.centralwidget.setObjectName(u"centralwidget")
-        self.tabWidget = QTabWidget(self.centralwidget)
-        self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 0, 801, 271))
-        font = QFont()
+    def initUI(self):
+        self.tabWidget = QTabWidget(self)
+        self.tabWidget.setObjectName("tabWidget")
+        self.tabWidget.setGeometry(QtCore.QRect(0, 0, 801, 271))
+        
+        font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
         self.tabWidget.setFont(font)
+
         self.tab_binary = QWidget()
         self.tab_binary.setObjectName(u"tab_binary")
+
         self.toplabel_binary = QLabel(self.tab_binary)
         self.toplabel_binary.setObjectName(u"toplabel_binary")
         self.toplabel_binary.setGeometry(QRect(280, 0, 251, 41))
@@ -42,6 +34,7 @@ class Ui_MainWindow(object):
         font1.setWeight(75)
         self.toplabel_binary.setFont(font1)
         self.toplabel_binary.setAlignment(Qt.AlignCenter)
+
         self.entry_binary = QLineEdit(self.tab_binary)
         self.entry_binary.setObjectName(u"entry_binary")
         self.entry_binary.setGeometry(QRect(150, 60, 571, 31))
@@ -51,6 +44,7 @@ class Ui_MainWindow(object):
         font2.setWeight(75)
         self.entry_binary.setFont(font2)
         self.entry_binary.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
         self.label_binary = QLabel(self.tab_binary)
         self.label_binary.setObjectName(u"label_binary")
         self.label_binary.setGeometry(QRect(20, 60, 121, 31))
@@ -60,100 +54,107 @@ class Ui_MainWindow(object):
         font3.setWeight(75)
         self.label_binary.setFont(font3)
         self.label_binary.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        
         self.entry_decimal = QLineEdit(self.tab_binary)
         self.entry_decimal.setObjectName(u"entry_decimal")
         self.entry_decimal.setGeometry(QRect(150, 100, 571, 31))
         self.entry_decimal.setFont(font2)
         self.entry_decimal.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
         self.label_decimal = QLabel(self.tab_binary)
         self.label_decimal.setObjectName(u"label_decimal")
         self.label_decimal.setGeometry(QRect(20, 100, 121, 31))
         self.label_decimal.setFont(font3)
         self.label_decimal.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        
         self.button_binary = QPushButton(self.tab_binary)
         self.button_binary.setObjectName(u"button_binary")
         self.button_binary.setGeometry(QRect(350, 160, 101, 51))
         self.button_binary.setFont(font3)
+        
         self.tabWidget.addTab(self.tab_binary, "")
         self.tab_hexa = QWidget()
         self.tab_hexa.setObjectName(u"tab_hexa")
+
         self.label_decimal_hexa = QLabel(self.tab_hexa)
         self.label_decimal_hexa.setObjectName(u"label_decimal_hexa")
         self.label_decimal_hexa.setGeometry(QRect(20, 100, 121, 31))
         self.label_decimal_hexa.setFont(font3)
         self.label_decimal_hexa.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        
         self.entry_hexa = QLineEdit(self.tab_hexa)
         self.entry_hexa.setObjectName(u"entry_hexa")
         self.entry_hexa.setGeometry(QRect(150, 60, 571, 31))
         self.entry_hexa.setFont(font2)
         self.entry_hexa.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
         self.toplabel_hexa = QLabel(self.tab_hexa)
         self.toplabel_hexa.setObjectName(u"toplabel_hexa")
         self.toplabel_hexa.setGeometry(QRect(280, 0, 251, 41))
         self.toplabel_hexa.setFont(font1)
         self.toplabel_hexa.setAlignment(Qt.AlignCenter)
+        
         self.button_hexa = QPushButton(self.tab_hexa)
         self.button_hexa.setObjectName(u"button_hexa")
         self.button_hexa.setGeometry(QRect(350, 160, 101, 51))
         self.button_hexa.setFont(font3)
+        
         self.label_hexa = QLabel(self.tab_hexa)
         self.label_hexa.setObjectName(u"label_hexa")
         self.label_hexa.setGeometry(QRect(20, 60, 121, 31))
         self.label_hexa.setFont(font3)
         self.label_hexa.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        
         self.entry_decimal_hexa = QLineEdit(self.tab_hexa)
         self.entry_decimal_hexa.setObjectName(u"entry_decimal_hexa")
         self.entry_decimal_hexa.setGeometry(QRect(150, 100, 571, 31))
         self.entry_decimal_hexa.setFont(font2)
         self.entry_decimal_hexa.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
         self.tabWidget.addTab(self.tab_hexa, "")
         self.tab_octal = QWidget()
         self.tab_octal.setObjectName(u"tab_octal")
+        
         self.label_decimal_octal = QLabel(self.tab_octal)
         self.label_decimal_octal.setObjectName(u"label_decimal_octal")
         self.label_decimal_octal.setGeometry(QRect(20, 100, 121, 31))
         self.label_decimal_octal.setFont(font3)
         self.label_decimal_octal.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        
         self.entry_octal = QLineEdit(self.tab_octal)
         self.entry_octal.setObjectName(u"entry_octal")
         self.entry_octal.setGeometry(QRect(150, 60, 571, 31))
         self.entry_octal.setFont(font2)
         self.entry_octal.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
         self.toplabel_octal = QLabel(self.tab_octal)
         self.toplabel_octal.setObjectName(u"toplabel_octal")
         self.toplabel_octal.setGeometry(QRect(280, 0, 251, 41))
         self.toplabel_octal.setFont(font1)
         self.toplabel_octal.setAlignment(Qt.AlignCenter)
+        
         self.button_octal = QPushButton(self.tab_octal)
         self.button_octal.setObjectName(u"button_octal")
         self.button_octal.setGeometry(QRect(350, 160, 101, 51))
         self.button_octal.setFont(font3)
+        
         self.label_octal = QLabel(self.tab_octal)
         self.label_octal.setObjectName(u"label_octal")
         self.label_octal.setGeometry(QRect(20, 60, 121, 31))
         self.label_octal.setFont(font3)
         self.label_octal.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        
         self.entry_decimal_octal = QLineEdit(self.tab_octal)
         self.entry_decimal_octal.setObjectName(u"entry_decimal_octal")
         self.entry_decimal_octal.setGeometry(QRect(150, 100, 571, 31))
         self.entry_decimal_octal.setFont(font2)
         self.entry_decimal_octal.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        
         self.tabWidget.addTab(self.tab_octal, "")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(MainWindow)
-        self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 802, 21))
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(MainWindow)
-        self.statusbar.setObjectName(u"statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-
-        self.retranslateUi(MainWindow)
-
         self.tabWidget.setCurrentIndex(2)
 
 
-        QMetaObject.connectSlotsByName(MainWindow)
+        # QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
