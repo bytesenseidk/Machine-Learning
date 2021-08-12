@@ -1,8 +1,6 @@
 import sys, winsound
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLCDNumber
-from PyQt5.QtCore import (QCoreApplication, QObject, QRunnable, QThread, QThreadPool, pyqtSignal)
-
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 class MainWindow(QMainWindow):
     def __init__(self):
