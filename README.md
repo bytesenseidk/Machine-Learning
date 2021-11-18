@@ -1,4 +1,4 @@
-# Machine Learning and Neural Network projects for personal learning purposes.
+# Machine Learning and Neural Network projects for personal learning.
 ## Includes multiple learning algorithms and models
 1. Supervised Learning
 2. Unsupervised Learning
