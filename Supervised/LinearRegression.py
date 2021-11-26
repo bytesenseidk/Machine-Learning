@@ -28,4 +28,3 @@ plt.ylabel("Predictions")
 plt.xlabel("Actual")
 plt.axis("equal")
 plt.show()
-
