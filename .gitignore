@@ -1,5 +1,5 @@
-ml_env
 .idea/Machine-Learning.iml
 .idea/modules.xml
-Single-Layerd-ANN/.idea/modules.xml
-Single-Layerd-ANN/.idea/Iris_ANN.iml
+.vscode/*
+Single-Layerd-ANN/.idea/*
+ml_env
