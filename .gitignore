@@ -1,5 +1,4 @@
-.idea/Machine-Learning.iml
-.idea/modules.xml
-.vscode/*
-Single-Layerd-ANN/.idea/*
+.idea
+.vscode
+Single-Layerd-ANN/.idea
 ml_env
