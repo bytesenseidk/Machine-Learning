@@ -12,5 +12,3 @@ mail_servers = {
     "verizon": [["outgoing.verizon.net", 587], ["incoming.verizon.net", 143]]
     # Find additional mail servers at https://www.systoolsgroup.com/imap/
 }
-
-test
