@@ -55,7 +55,11 @@ class Login(object):
     
     
 if __name__ == "__main__":
-    user = Login("some_mail@gmail.com", "some_password")
+    with open("LoginCreds.txt", "r") as f:
+        email = f.readline().strip()
+        password = f.readline().strip()
+        api_key = f.readline().strip()
+    user = Login(email, password)
     print(user)
     user.login()
     
