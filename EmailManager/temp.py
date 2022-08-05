@@ -16,17 +16,20 @@ class Login(object):
     def __init__(self, email, password):
         self.email = email
         self.password = password
-        self.smtp_server, self.smtp_port = Login.mail_servers[email.split("@")[1].split(".")[0]][0]
-        self.imap_server, self.imap_port = Login.mail_servers[email.split("@")[1].split(".")[0]][1]
-    
+        try:
+            self.smtp_server, self.smtp_port = Login.mail_servers[email.split("@")[1].split(".")[0]][0]
+            self.imap_server, self.imap_port = Login.mail_servers[email.split("@")[1].split(".")[0]][1]
+        except KeyError:
+            print("Invalid email address")
+        
     def __str__(self):
-        data = ""
+        data = "\n"
         for key, value in self.__dict__.items():
             data += f"{key}: \t{value}\n"
         return data
     
     
 if __name__ == "__main__":
-    user = Login("some_mail@aol.com", "some_password")
+    user = Login("some_mail@gmail.com", "some_password")
     print(user)
     
