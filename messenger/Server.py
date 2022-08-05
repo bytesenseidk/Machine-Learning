@@ -2,7 +2,6 @@ import os
 import select
 import socket
 
-
 class Server(object):
     def __init__(self, IP="127.0.0.1", PORT=1234):
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -24,7 +23,6 @@ class Server(object):
             return {"header": message_header, "data": client_socket.recv(message_length)}
         except:
             return False
-
 
 if __name__ == "__main__":
     server = Server()
@@ -54,5 +52,5 @@ if __name__ == "__main__":
                     if server.client_socket != notified_socket:
                         server.client_socket.send(user["header"] + user["data"] + message["header"] + message["data"])
         for notified_socket in exception_sockets:
-            sockets_list.remove(notified_socket)
+            Server.sockets_list.remove(notified_socket)
             del server.clients[notified_socket]
