@@ -20,13 +20,30 @@ class Login(object):
             self.smtp_server, self.smtp_port = Login.mail_servers[email.split("@")[1].split(".")[0]][0]
             self.imap_server, self.imap_port = Login.mail_servers[email.split("@")[1].split(".")[0]][1]
         except KeyError:
-            print("Invalid email address")
+            pass
         
     def __str__(self):
-        data = "\n"
-        for key, value in self.__dict__.items():
-            data += f"{key}: \t{value}\n"
-        return data
+        if hasattr(self, "smtp_port"):
+            data = "\n"
+            for key, value in self.__dict__.items():
+                data += f"{key}: \t{value}\n"
+            return data
+        return "Invalid email address"
+    
+    def login(self):
+        pass
+    
+    def logout(self):
+        pass
+    
+    def send_email(self):
+        pass
+    
+    def read_email(self):
+        pass
+    
+    def delete_email(self):
+        pass
     
     
 if __name__ == "__main__":
