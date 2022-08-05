@@ -12,6 +12,7 @@ from email.mime.multipart import MIMEMultipart
 from mimetypes import guess_type as guess_mime_type
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 
+
 class Login(object):
     mail_servers = {
         "gmail": [["smtp.gmail.com", 587], ["imap.gmail.com", 993]],
@@ -27,6 +28,7 @@ class Login(object):
         "verizon": [["outgoing.verizon.net", 587], ["incoming.verizon.net", 143]]
         # Find additional mail servers at https://www.systoolsgroup.com/imap/
     }
+    
     def __init__(self, email, password):
         self.email = email
         self.password = password
@@ -44,16 +46,9 @@ class Login(object):
             return data
         return "Invalid email address"
     
-    def login(self):
-        imap = imaplib.IMAP4_SSL(self.imap_server)
-        try:
-            imap.login(self.email, self.password)
-            return True
-        except imaplib.IMAP4.error:
-            print("Invalid email address or password")
-            return False
-    
-    def gmail_validation(self):
+    @staticmethod
+    def gmail_validation():
+        # Gmail user access and refresh tokens
         scope = ["https://mail.google.com/"]
         creds = None
         if os.path.exists("token.pickle"):
@@ -68,6 +63,15 @@ class Login(object):
             with open("token.pickle", "wb") as token:
                 pickle.dump(creds, token)
         return build("gmail", "v1", credentials=creds)
+    
+    def login(self):
+        imap = imaplib.IMAP4_SSL(self.imap_server)
+        try:
+            imap.login(self.email, self.password)
+            return True
+        except imaplib.IMAP4.error:
+            print("Invalid email address or password")
+            return False
     
     def logout(self):
         pass
