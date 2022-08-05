@@ -1,3 +1,5 @@
+import imaplib
+
 class Login(object):
     mail_servers = {
         "gmail": [["smtp.gmail.com", 587], ["imap.gmail.com", 993]],
@@ -31,7 +33,13 @@ class Login(object):
         return "Invalid email address"
     
     def login(self):
-        pass
+        try:
+            imap = imaplib.IMAP4_SSL(self.imap_server, self.imap_port)
+            imap.login(self.email, self.password)
+            return True
+        except imaplib.IMAP4.error:
+            print("Invalid email address or password")
+            return False
     
     def logout(self):
         pass
@@ -49,4 +57,5 @@ class Login(object):
 if __name__ == "__main__":
     user = Login("some_mail@gmail.com", "some_password")
     print(user)
+    user.login()
     
