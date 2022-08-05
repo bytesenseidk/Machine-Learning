@@ -33,8 +33,8 @@ class Login(object):
         return "Invalid email address"
     
     def login(self):
+        imap = imaplib.IMAP4_SSL(self.imap_server, self.imap_port)
         try:
-            imap = imaplib.IMAP4_SSL(self.imap_server, self.imap_port)
             imap.login(self.email, self.password)
             return True
         except imaplib.IMAP4.error:
