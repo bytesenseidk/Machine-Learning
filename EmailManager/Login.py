@@ -1,4 +1,16 @@
+import os
+import pickle
 import imaplib
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from email.mime.audio import MIMEAudio
+from email.mime.multipart import MIMEMultipart
+from mimetypes import guess_type as guess_mime_type
+from base64 import urlsafe_b64encode, urlsafe_b64decode
 
 class Login(object):
     mail_servers = {
@@ -34,13 +46,28 @@ class Login(object):
     
     def login(self):
         imap = imaplib.IMAP4_SSL(self.imap_server)
-        imap.login(self.email, self.password)
-        # try:
-        #     imap.login(self.email, self.password)
-        #     return True
-        # except imaplib.IMAP4.error:
-        #     print("Invalid email address or password")
-        #     return False
+        try:
+            imap.login(self.email, self.password)
+            return True
+        except imaplib.IMAP4.error:
+            print("Invalid email address or password")
+            return False
+    
+    def gmail_validation(self):
+        scope = ["https://mail.google.com/"]
+        creds = None
+        if os.path.exists("token.pickle"):
+            with open("token.pickle", "rb") as token:
+                creds = pickle.load(token)
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file("Client_Credentials.json", scope)
+                creds = flow.run_local_server(port=0)
+            with open("token.pickle", "wb") as token:
+                pickle.dump(creds, token)
+        return build("gmail", "v1", credentials=creds)
     
     def logout(self):
         pass
