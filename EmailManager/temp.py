@@ -13,3 +13,4 @@ mail_servers = {
     # Find additional mail servers at https://www.systoolsgroup.com/imap/
 }
 
+test
