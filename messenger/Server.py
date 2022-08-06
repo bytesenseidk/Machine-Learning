@@ -14,7 +14,6 @@ class Server(object):
         os.system("cls")
         print(f"[ SERVER UP AND RUNNING ]\n[IP: {IP}]\n[Port: {PORT}]\n")
 
-
     def receive_message(self, client_socket):
         try:
             message_header = client_socket.recv(self.HEADER_LENGTH)
