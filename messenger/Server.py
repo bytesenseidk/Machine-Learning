@@ -11,8 +11,9 @@ class Server(object):
         self.HEADER_LENGTH = 10
         self.sockets_list = [self.server_socket]
         self.clients = {}
-        os.system("clear")
+        os.system("cls")
         print(f"[ SERVER UP AND RUNNING ]\n[IP: {IP}]\n[Port: {PORT}]\n")
+
 
     def receive_message(self, client_socket):
         try:
