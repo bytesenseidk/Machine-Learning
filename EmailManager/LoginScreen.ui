@@ -17,7 +17,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(100, 100, 100, 255), stop:1 rgba(153, 153, 153, 255));</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -26,7 +26,7 @@
       <x>0</x>
       <y>10</y>
       <width>801</width>
-      <height>80</height>
+      <height>111</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="TitleLayout">
@@ -43,10 +43,10 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
-        <string>LOGIN</string>
+        <string>Email Manager</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -59,9 +59,9 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>90</y>
+      <y>140</y>
       <width>681</width>
-      <height>301</height>
+      <height>201</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="CenterLayout">
@@ -69,13 +69,13 @@
       <widget class="QLabel" name="label_2">
        <property name="font">
         <font>
-         <pointsize>18</pointsize>
+         <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(0,0,0,0);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Email</string>
@@ -109,13 +109,13 @@
       <widget class="QLabel" name="label_4">
        <property name="font">
         <font>
-         <pointsize>18</pointsize>
+         <pointsize>14</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgba(0,0,0,0);</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Password</string>
@@ -144,11 +144,11 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget_3">
+   <widget class="QWidget" name="verticalWidget_3" native="true">
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>430</y>
+      <y>410</y>
       <width>201</width>
       <height>80</height>
      </rect>
@@ -158,7 +158,7 @@
       <widget class="QPushButton" name="pushButton">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>18</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
