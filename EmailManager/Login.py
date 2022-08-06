@@ -1,4 +1,5 @@
 import os
+import sys
 import pickle
 import imaplib
 from googleapiclient.discovery import build
@@ -36,7 +37,7 @@ class Login(object):
             self.smtp_server, self.smtp_port = Login.mail_servers[email.split("@")[1].split(".")[0]][0]
             self.imap_server, self.imap_port = Login.mail_servers[email.split("@")[1].split(".")[0]][1]
         except KeyError:
-            pass
+            sys.exit("Invalid email address")
         
     def __str__(self):
         if hasattr(self, "smtp_port"):

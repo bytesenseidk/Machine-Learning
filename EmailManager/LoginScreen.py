@@ -2,6 +2,7 @@
 # from PySide2.QtGui import QFont
 # from PySide2.QtWidgets import *
 import sys
+import Login
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 
@@ -27,29 +28,29 @@ class MainWindow(QMainWindow):
         self.top_label.setText("Email Manager")
         
         
-        self.username_label = QtWidgets.QLabel(self)
-        self.username_label.setObjectName("username_label")
-        self.username_label.setGeometry(QtCore.QRect(350, 120, 100, 30))
+        self.email_label = QtWidgets.QLabel(self)
+        self.email_label.setObjectName("email_label")
+        self.email_label.setGeometry(QtCore.QRect(350, 120, 100, 30))
         label_font = QtGui.QFont()
         label_font.setPointSize(14)
         label_font.setBold(True)
         label_font.setWeight(75)
-        self.username_label.setFont(label_font)
-        self.username_label.setStyleSheet("")
-        self.username_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.username_label.setText("Email")
+        self.email_label.setFont(label_font)
+        self.email_label.setStyleSheet("")
+        self.email_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.email_label.setText("Email")
         
-        self.username_input = QtWidgets.QLineEdit(self)
-        self.username_input.setObjectName("username_input")
-        self.username_input.setGeometry(QtCore.QRect(200, 150, 400, 30))
+        self.email_input = QtWidgets.QLineEdit(self)
+        self.email_input.setObjectName("email_input")
+        self.email_input.setGeometry(QtCore.QRect(200, 150, 400, 30))
         input_font = QtGui.QFont()
         input_font.setPointSize(14)
         input_font.setBold(True)
         input_font.setWeight(50)
-        self.username_input.setFont(input_font)
-        self.username_input.setStyleSheet("")
-        self.username_input.setMaxLength(100)
-        self.username_input.setPlaceholderText("")
+        self.email_input.setFont(input_font)
+        self.email_input.setStyleSheet("")
+        self.email_input.setMaxLength(100)
+        self.email_input.setPlaceholderText("")
         
         self.password_label = QtWidgets.QLabel(self)
         self.password_label.setObjectName("password_label")
@@ -76,6 +77,18 @@ class MainWindow(QMainWindow):
         font3.setWeight(75)
         self.signin_button.setFont(font3)
         self.signin_button.setText("Login")
+        self.signin_button.clicked.connect(self.login)
+    
+    def login(self):
+        email = self.email_input.text()
+        password = self.password_input.text()
+        try:
+            user = Login.Login(email, password)
+            user.login()
+        except IndexError:
+            print("Invalid email")
+        except Exception as E:
+            print(E)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
