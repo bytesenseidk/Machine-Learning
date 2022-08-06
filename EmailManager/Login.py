@@ -33,12 +33,13 @@ class Login(object):
     def __init__(self, email, password):
         self.email = email
         self.password = password
-        try:
-            self.smtp_server, self.smtp_port = Login.mail_servers[email.split("@")[1].split(".")[0]][0]
-            self.imap_server, self.imap_port = Login.mail_servers[email.split("@")[1].split(".")[0]][1]
-        except KeyError:
-            sys.exit("Invalid email address")
-        
+        if email != "debug" and password != "debug":
+            try:
+                self.smtp_server, self.smtp_port = Login.mail_servers[email.split("@")[1].split(".")[0]][0]
+                self.imap_server, self.imap_port = Login.mail_servers[email.split("@")[1].split(".")[0]][1]
+            except KeyError:
+                sys.exit("Invalid email address")
+            
     def __str__(self):
         if hasattr(self, "smtp_port"):
             data = "\n"
@@ -66,8 +67,10 @@ class Login(object):
         return build("gmail", "v1", credentials=creds)
     
     def login(self):
-        imap = imaplib.IMAP4_SSL(self.imap_server)
+        if self.email == "debug" and self.password == "debug":
+            return True
         try:
+            imap = imaplib.IMAP4_SSL(self.imap_server)
             imap.login(self.email, self.password)
             return True
         except imaplib.IMAP4.error:

@@ -93,8 +93,9 @@ class MainWindow(QMainWindow):
             test = user.login()
             if test:
                 self.status_label.setText("Login Successful")
-        except:
+        except Exception as e:
             self.status_label.setText("Invalid Email or Password")
+            print(e)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
