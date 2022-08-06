@@ -1,7 +1,6 @@
 import os
 import sys
 import errno
-import select
 import socket
 
 class Client(object):
