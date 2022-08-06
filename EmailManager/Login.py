@@ -71,7 +71,6 @@ class Login(object):
             imap.login(self.email, self.password)
             return True
         except imaplib.IMAP4.error:
-            print("Invalid email address or password")
             return False
     
     def logout(self):

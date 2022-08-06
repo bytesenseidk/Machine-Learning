@@ -76,6 +76,13 @@ class MainWindow(QMainWindow):
         self.signin_button.setFont(font3)
         self.signin_button.setText("Login")
         self.signin_button.clicked.connect(self.login)
+        
+        self.status_label = QtWidgets.QLabel(self)
+        self.status_label.setObjectName("status_label")
+        self.status_label.setGeometry(QtCore.QRect(245, 400, 300, 30))
+        self.status_label.setFont(label_font)
+        self.status_label.setStyleSheet("")
+        self.status_label.setAlignment(QtCore.Qt.AlignCenter)
     
     
     def login(self):
@@ -83,12 +90,11 @@ class MainWindow(QMainWindow):
         password = self.password_input.text()
         try:
             user = Login.Login(email, password)
-            user.login()
-        except IndexError:
-            print("Invalid email")
-        except Exception as E:
-            print(E)
-
+            test = user.login()
+            if test:
+                self.status_label.setText("Login Successful")
+        except:
+            self.status_label.setText("Invalid Email or Password")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
