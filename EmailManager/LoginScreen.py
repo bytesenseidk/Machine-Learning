@@ -1,112 +1,84 @@
-from PySide2.QtCore import QCoreApplication, QMetaObject, QRect, Qt
-from PySide2.QtGui import QFont
-from PySide2.QtWidgets import *
+# from PySide2.QtCore import QCoreApplication, QMetaObject, QRect, Qt
+# from PySide2.QtGui import QFont
+# from PySide2.QtWidgets import *
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 
-
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        if MainWindow.objectName():
-            MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
-        MainWindow.setAutoFillBackground(False)
-        MainWindow.setStyleSheet(u"")
-        self.centralwidget = QWidget(MainWindow)
-        self.centralwidget.setObjectName(u"centralwidget")
-        self.verticalLayoutWidget = QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(0, 10, 801, 111))
-        self.TitleLayout = QVBoxLayout(self.verticalLayoutWidget)
-        self.TitleLayout.setObjectName(u"TitleLayout")
-        self.TitleLayout.setContentsMargins(0, 0, 0, 0)
-        self.label = QLabel(self.verticalLayoutWidget)
-        self.label.setObjectName(u"label")
-        font = QFont()
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.setGeometry(100, 100, 800, 600)
+        self.setWindowTitle("Email Manager | Login")
+        self.initUi()
+        
+    def initUi(self):
+        self.top_label = QtWidgets.QLabel(self)
+        self.top_label.setObjectName("top_label")
+        self.top_label.setGeometry(QtCore.QRect(0, 0, 800, 100))
+        font = QtGui.QFont()
         font.setPointSize(22)
         font.setBold(True)
         font.setWeight(75)
-        self.label.setFont(font)
-        self.label.setLayoutDirection(Qt.LeftToRight)
-        self.label.setStyleSheet(u"")
-        self.label.setAlignment(Qt.AlignCenter)
+        self.top_label.setFont(font)
+        self.top_label.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.top_label.setStyleSheet("")
+        self.top_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.top_label.setText("Email Manager")
+        
+        
+        self.username_label = QtWidgets.QLabel(self)
+        self.username_label.setObjectName("username_label")
+        self.username_label.setGeometry(QtCore.QRect(350, 120, 100, 30))
+        label_font = QtGui.QFont()
+        label_font.setPointSize(14)
+        label_font.setBold(True)
+        label_font.setWeight(75)
+        self.username_label.setFont(label_font)
+        self.username_label.setStyleSheet("")
+        self.username_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.username_label.setText("Email")
+        
+        self.username_input = QtWidgets.QLineEdit(self)
+        self.username_input.setObjectName("username_input")
+        self.username_input.setGeometry(QtCore.QRect(200, 150, 400, 30))
+        input_font = QtGui.QFont()
+        input_font.setPointSize(14)
+        input_font.setBold(True)
+        input_font.setWeight(50)
+        self.username_input.setFont(input_font)
+        self.username_input.setStyleSheet("")
+        self.username_input.setMaxLength(100)
+        self.username_input.setPlaceholderText("")
+        
+        self.password_label = QtWidgets.QLabel(self)
+        self.password_label.setObjectName("password_label")
+        self.password_label.setGeometry(QtCore.QRect(345, 200, 110, 30))
+        self.password_label.setFont(label_font)
+        self.password_label.setStyleSheet("")
+        self.password_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.password_label.setText("Password")
 
-        self.TitleLayout.addWidget(self.label)
-
-        self.verticalLayoutWidget_2 = QWidget(self.centralwidget)
-        self.verticalLayoutWidget_2.setObjectName(u"verticalLayoutWidget_2")
-        self.verticalLayoutWidget_2.setGeometry(QRect(60, 140, 681, 201))
-        self.CenterLayout = QVBoxLayout(self.verticalLayoutWidget_2)
-        self.CenterLayout.setObjectName(u"CenterLayout")
-        self.CenterLayout.setContentsMargins(0, 0, 0, 0)
-        self.label_2 = QLabel(self.verticalLayoutWidget_2)
-        self.label_2.setObjectName(u"label_2")
-        font1 = QFont()
-        font1.setPointSize(14)
-        font1.setBold(True)
-        font1.setWeight(75)
-        self.label_2.setFont(font1)
-        self.label_2.setStyleSheet(u"")
-        self.label_2.setAlignment(Qt.AlignCenter)
-
-        self.CenterLayout.addWidget(self.label_2)
-
-        self.lineEdit = QLineEdit(self.verticalLayoutWidget_2)
-        self.lineEdit.setObjectName(u"lineEdit")
-        font2 = QFont()
-        font2.setPointSize(16)
-        font2.setBold(True)
-        font2.setWeight(75)
-        self.lineEdit.setFont(font2)
-        self.lineEdit.setStyleSheet(u"")
-        self.lineEdit.setMaxLength(100)
-
-        self.CenterLayout.addWidget(self.lineEdit)
-
-        self.label_4 = QLabel(self.verticalLayoutWidget_2)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setFont(font1)
-        self.label_4.setStyleSheet(u"")
-        self.label_4.setAlignment(Qt.AlignCenter)
-
-        self.CenterLayout.addWidget(self.label_4)
-
-        self.lineEdit_3 = QLineEdit(self.verticalLayoutWidget_2)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
-        self.lineEdit_3.setFont(font2)
-        self.lineEdit_3.setMaxLength(100)
-
-        self.CenterLayout.addWidget(self.lineEdit_3)
-
-        self.verticalWidget_3 = QWidget(self.centralwidget)
-        self.verticalWidget_3.setObjectName(u"verticalWidget_3")
-        self.verticalWidget_3.setGeometry(QRect(300, 410, 201, 80))
-        self.BottomLayout = QVBoxLayout(self.verticalWidget_3)
-        self.BottomLayout.setObjectName(u"BottomLayout")
-        self.pushButton = QPushButton(self.verticalWidget_3)
-        self.pushButton.setObjectName(u"pushButton")
-        font3 = QFont()
+        self.password_input = QtWidgets.QLineEdit(self)
+        self.password_input.setObjectName("password_input")
+        self.password_input.setGeometry(QtCore.QRect(200, 230, 400, 30))
+        self.password_input.setFont(input_font)
+        self.password_input.setMaxLength(100)
+        self.password_input.setPlaceholderText("")
+        self.password_input.setEchoMode(QtWidgets.QLineEdit.Password)
+        
+        self.signin_button = QtWidgets.QPushButton(self)
+        self.signin_button.setObjectName("signin_button")
+        self.signin_button.setGeometry(QtCore.QRect(350, 280, 100, 50))
+        font3 = QtGui.QFont()
         font3.setPointSize(18)
         font3.setBold(True)
         font3.setWeight(75)
-        self.pushButton.setFont(font3)
-
-        self.BottomLayout.addWidget(self.pushButton)
-
-        MainWindow.setCentralWidget(self.centralwidget)
-
-        self.retranslateUi(MainWindow)
-
-        QMetaObject.connectSlotsByName(MainWindow)
-    # setupUi
-
-    def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Email Manager", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Email", None))
-        self.lineEdit.setPlaceholderText("")
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Password", None))
-        self.lineEdit_3.setPlaceholderText("")
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Login", None))
-    # retranslateUi
+        self.signin_button.setFont(font3)
+        self.signin_button.setText("Login")
 
 if __name__ == "__main__":
-    Ui_MainWindow()
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
