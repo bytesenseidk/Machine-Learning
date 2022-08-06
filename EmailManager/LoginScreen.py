@@ -1,10 +1,8 @@
-# from PySide2.QtCore import QCoreApplication, QMetaObject, QRect, Qt
-# from PySide2.QtGui import QFont
-# from PySide2.QtWidgets import *
 import sys
 import Login
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -12,6 +10,7 @@ class MainWindow(QMainWindow):
         self.setGeometry(100, 100, 800, 600)
         self.setWindowTitle("Email Manager | Login")
         self.initUi()
+        
         
     def initUi(self):
         self.top_label = QtWidgets.QLabel(self)
@@ -26,7 +25,6 @@ class MainWindow(QMainWindow):
         self.top_label.setStyleSheet("")
         self.top_label.setAlignment(QtCore.Qt.AlignCenter)
         self.top_label.setText("Email Manager")
-        
         
         self.email_label = QtWidgets.QLabel(self)
         self.email_label.setObjectName("email_label")
@@ -79,6 +77,7 @@ class MainWindow(QMainWindow):
         self.signin_button.setText("Login")
         self.signin_button.clicked.connect(self.login)
     
+    
     def login(self):
         email = self.email_input.text()
         password = self.password_input.text()
@@ -89,6 +88,7 @@ class MainWindow(QMainWindow):
             print("Invalid email")
         except Exception as E:
             print(E)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
