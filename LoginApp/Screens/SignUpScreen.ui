@@ -77,7 +77,7 @@
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>Username</string>
+        <string>Username:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -117,7 +117,7 @@
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>Password</string>
+        <string>Password:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -157,7 +157,7 @@
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>Password</string>
+        <string>Verify Password:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
