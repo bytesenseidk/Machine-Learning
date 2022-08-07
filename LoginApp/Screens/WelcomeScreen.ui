@@ -89,7 +89,7 @@
     </property>
     <layout class="QVBoxLayout" name="BottomLayout_3">
      <item>
-      <widget class="QPushButton" name="exit_button_2">
+      <widget class="QPushButton" name="exit_button">
        <property name="font">
         <font>
          <pointsize>14</pointsize>

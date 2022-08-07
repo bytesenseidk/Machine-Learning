@@ -13,59 +13,25 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalWidget_3" native="true">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>410</y>
-      <width>201</width>
-      <height>121</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="BottomLayout">
-     <item>
-      <widget class="QPushButton" name="create_button">
-       <property name="font">
-        <font>
-         <pointsize>18</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Create</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="login_button">
-       <property name="font">
-        <font>
-         <pointsize>18</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Login</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
       <x>60</x>
       <y>140</y>
       <width>681</width>
-      <height>233</height>
+      <height>205</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="CenterLayout">
      <item>
-      <widget class="QLabel" name="email_label">
+      <widget class="QLabel" name="username_label">
        <property name="font">
         <font>
          <pointsize>14</pointsize>
@@ -85,7 +51,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="email_input">
+      <widget class="QLineEdit" name="username_input">
        <property name="font">
         <font>
          <pointsize>16</pointsize>
@@ -136,13 +102,28 @@
        <property name="maxLength">
         <number>100</number>
        </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
        <property name="placeholderText">
         <string/>
        </property>
       </widget>
      </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>390</y>
+      <width>681</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="password_label_2">
+      <widget class="QLabel" name="feedback_label">
        <property name="font">
         <font>
          <pointsize>14</pointsize>
@@ -154,27 +135,10 @@
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>Password</string>
+        <string/>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="password_input_2">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="maxLength">
-        <number>100</number>
-       </property>
-       <property name="placeholderText">
-        <string/>
        </property>
       </widget>
      </item>
@@ -206,7 +170,7 @@
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>Sign Up</string>
+        <string>Login</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -215,7 +179,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="verticalWidget_5" native="true">
+   <widget class="QWidget" name="verticalWidget_4" native="true">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -224,7 +188,7 @@
       <height>61</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="BottomLayout_3">
+    <layout class="QVBoxLayout" name="BottomLayout_2">
      <item>
       <widget class="QPushButton" name="exit_button">
        <property name="font">
@@ -236,6 +200,46 @@
        </property>
        <property name="text">
         <string>Exit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalWidget_5" native="true">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>470</y>
+      <width>201</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="BottomLayout_3">
+     <item>
+      <widget class="QPushButton" name="login_button">
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Login</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="signup_button">
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Sign Up</string>
        </property>
       </widget>
      </item>
