@@ -8,6 +8,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.setGeometry(100, 100, 800, 600)
         self.setWindowTitle("Email Manager | Login")
+        self.setStyleSheet("background-color: rgb(154, 154, 154);")
         self.initUi()
         
     def initUi(self):
