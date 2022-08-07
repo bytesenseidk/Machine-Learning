@@ -12,7 +12,7 @@ class LoginScreen(QMainWindow):
     def __init__(self):
         super(LoginScreen, self).__init__()
         loadUi('Screens/LoginScreen.ui', self)
-        self.setWindowTitle("Login")
+        screens.setWindowTitle("Login System | Login")
         self.login_button.clicked.connect(self.login)
         self.signup_button.clicked.connect(self.sign_up)
         self.exit_button.clicked.connect(self.exit)
@@ -27,7 +27,6 @@ class LoginScreen(QMainWindow):
                 self.welcome_screen = WelcomeScreen(self.username)
                 screens.addWidget(self.welcome_screen)
                 screens.setCurrentIndex(screens.currentIndex() + 1)
-                # self.welcome_screen.show()
             else:
                 self.feedback_label.setText("Invalid Username or Password")
         except Exception as e:
@@ -38,7 +37,6 @@ class LoginScreen(QMainWindow):
         self.signup_screen = SignUpScreen()
         screens.addWidget(self.signup_screen)
         screens.setCurrentIndex(screens.currentIndex() + 1)
-        # self.signup_screen.show()
     
     def exit(self):
         user_file.encryption()
@@ -50,7 +48,7 @@ class WelcomeScreen(QMainWindow):
         self.username = username.split('@')[0]
         super(WelcomeScreen, self).__init__()
         loadUi('Screens/WelcomeScreen.ui', self)
-        self.setWindowTitle("Email Manager | Welcome")
+        screens.setWindowTitle("Login System | Welcome")
         self.welcome_label.setText(f"Welcome {self.username}")
         self.logout_button.clicked.connect(self.logout)
         self.exit_button.clicked.connect(self.exit)
@@ -60,7 +58,6 @@ class WelcomeScreen(QMainWindow):
         self.login_screen = LoginScreen()
         screens.addWidget(self.login_screen)
         screens.setCurrentIndex(screens.currentIndex() + 1)
-        # self.login_screen.show()
               
     def exit(self):
         user_file.encryption()
@@ -71,7 +68,7 @@ class SignUpScreen(QMainWindow):
     def __init__(self):
         super(SignUpScreen, self).__init__()
         loadUi('Screens/SignUpScreen.ui', self)
-        self.setWindowTitle("Sign Up")
+        screens.setWindowTitle("Login System | Sign Up")
         self.create_button.clicked.connect(self.sign_up)
         self.login_button.clicked.connect(self.login)
         self.exit_button.clicked.connect(self.exit)   
@@ -94,7 +91,6 @@ class SignUpScreen(QMainWindow):
         self.login_screen = LoginScreen()
         screens.addWidget(self.login_screen)
         screens.setCurrentIndex(screens.currentIndex() + 1)
-        # self.login_screen.show()
     
     def exit(self):
         user_file.encryption()
