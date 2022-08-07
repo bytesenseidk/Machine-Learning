@@ -55,8 +55,8 @@
    <widget class="QWidget" name="verticalWidget_3" native="true">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>500</y>
+      <x>300</x>
+      <y>410</y>
       <width>201</width>
       <height>80</height>
      </rect>
@@ -73,6 +73,32 @@
        </property>
        <property name="text">
         <string>Logout</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalWidget_4" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>530</y>
+      <width>131</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="BottomLayout_2">
+     <item>
+      <widget class="QPushButton" name="exit_button">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Exit</string>
        </property>
       </widget>
      </item>
