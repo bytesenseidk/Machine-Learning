@@ -3,7 +3,7 @@ import Login
 from SignUp import SignUp
 from Encryption import Encrypt
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QApplication, QMainWindow, QAction
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 
 class LoginScreen(QMainWindow):
