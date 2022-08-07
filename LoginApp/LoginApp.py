@@ -1,8 +1,9 @@
 import sys
 import Login
 from SignUp import SignUp
+from Encryption import Encrypt
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QAction
 
 
 class LoginScreen(QMainWindow):
@@ -26,7 +27,6 @@ class LoginScreen(QMainWindow):
             else:
                 self.feedback_label.setText("Invalid Username or Password")
         except Exception as e:
-            print(e)
             self.feedback_label.setText(str(e))
     
     def sign_up(self):
@@ -35,6 +35,7 @@ class LoginScreen(QMainWindow):
         self.signup_screen.show()
     
     def exit(self):
+        user_file.encryption()
         sys.exit()
 
 
@@ -52,9 +53,11 @@ class WelcomeScreen(QMainWindow):
         self.close()
         self.login_screen = LoginScreen()
         self.login_screen.show()
-        
+              
     def exit(self):
+        user_file.encryption()
         sys.exit()
+        
         
 class SignUpScreen(QMainWindow):
     def __init__(self):
@@ -62,8 +65,8 @@ class SignUpScreen(QMainWindow):
         loadUi('Screens/SignUpScreen.ui', self)
         self.setWindowTitle("Sign Up")
         self.create_button.clicked.connect(self.sign_up)
-        self.exit_button.clicked.connect(self.exit)
         self.login_button.clicked.connect(self.login)
+        self.exit_button.clicked.connect(self.exit)   
         
     def sign_up(self):
         if SignUp.valid_username(self.username_input.text()):
@@ -72,25 +75,32 @@ class SignUpScreen(QMainWindow):
                 self.password = self.password_input.text()
                 user = SignUp(self.username, self.password)
                 user.save()
-                self.close()
-                self.login_screen = LoginScreen()
-                self.login_screen.show()
+                self.login()
             else:
                 self.feedback_label.setText("Passwords do not match")
         else:
             self.feedback_label.setText("Invalid Username")
             
-    
     def login(self):
         self.close()
         self.login_screen = LoginScreen()
         self.login_screen.show()
     
     def exit(self):
+        user_file.encryption()
         sys.exit()
+    
             
 if __name__ == "__main__":
+    userlist = "users.txt"
+    user_file = Encrypt(userlist)
+    try:
+        user_file.decryption()
+    except:
+        pass
     app = QApplication(sys.argv)
     window = LoginScreen()
     window.show()
-    sys.exit(app.exec_())
+    if sys.exit(app.exec_()):
+        print("Exiting")
+        user_file.encryption()
