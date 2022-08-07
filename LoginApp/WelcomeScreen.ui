@@ -78,18 +78,18 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="verticalWidget_4" native="true">
+   <widget class="QWidget" name="verticalWidget_5" native="true">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>530</y>
-      <width>131</width>
-      <height>71</height>
+      <x>10</x>
+      <y>540</y>
+      <width>101</width>
+      <height>61</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="BottomLayout_2">
+    <layout class="QVBoxLayout" name="BottomLayout_3">
      <item>
-      <widget class="QPushButton" name="exit_button">
+      <widget class="QPushButton" name="exit_button_2">
        <property name="font">
         <font>
          <pointsize>14</pointsize>

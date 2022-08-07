@@ -11,7 +11,7 @@ class LoginScreen(QMainWindow):
         loadUi('LoginScreen.ui', self)
         self.setWindowTitle("Login")
         self.login_button.clicked.connect(self.login)
-        self.sign_up_button.clicked.connect(self.sign_up)
+        self.signup_button.clicked.connect(self.sign_up)
         self.exit_button.clicked.connect(self.exit)
 
     def login(self):
@@ -30,8 +30,8 @@ class LoginScreen(QMainWindow):
     
     def sign_up(self):
         self.close()
-        self.sign_up_screen = SignUpScreen()
-        self.sign_up_screen.show()
+        self.signup_screen = SignUpScreen()
+        self.signup_screen.show()
     
     def exit(self):
         sys.exit()
@@ -62,9 +62,15 @@ class SignUpScreen(QMainWindow):
         self.setWindowTitle("Sign Up")
         self.create_button.clicked.connect(self.sign_up)
         self.exit_button.clicked.connect(self.exit)
+        self.login_button.clicked.connect(self.login)
         
     def sign_up(self):
         pass
+    
+    def login(self):
+        self.close()
+        self.login_screen = LoginScreen()
+        self.login_screen.show()
     
     def exit(self):
         sys.exit()
