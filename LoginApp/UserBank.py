@@ -56,11 +56,3 @@ class Database(metaclass=MetaSingleton):
     
     def verify_password(self, hashed_pass, password):
         return self.hasher.verify(hashed_pass, password)
-
-if __name__ == "__main__":
-    username = "some_username"
-    password = "some_password"
-    db = Database()
-    # db.save_account(username, password)
-    data = db.get_account(username)
-    print(db.verify_password(data["password"], password))

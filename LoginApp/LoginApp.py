@@ -56,6 +56,7 @@ class LoginScreen(QMainWindow, Navigations):
         except Exception as e:
             self.feedback_label.setText("Invalid username or password")
 
+
 class WelcomeScreen(QMainWindow, Navigations):
     def __init__(self, username):
         self.username = username.split('@')[0]
