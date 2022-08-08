@@ -3,6 +3,7 @@ import sys
 import random
 import sqlite3
 import datetime
+from argon2 import PasswordHasher
 from cryptography.fernet import Fernet
 
 
@@ -52,21 +53,15 @@ class Database(metaclass=MetaSingleton):
 class Hashing(object):
     def __init__(self, password):
         self.password = password
+        self.hasher = PasswordHasher()
         
     def hash_password(self):
-        """
-        Argon2 hash password.
-        return hashed password.
-        """
-        pass
+        """ Argon2 hash password """
+        return self.hasher.hash(self.password)
 
     def verify_password(self, hashed_password):
-        """
-        Argon2 hash password.
-        Compare new hashed password to old hashed password.
-        return comparison.
-        """
-        pass
+        """ Compare new hashed password to old hashed password """
+        return self.hasher.verify(self.hash_password(), hashed_password)
 
 
 class Salting(object):
