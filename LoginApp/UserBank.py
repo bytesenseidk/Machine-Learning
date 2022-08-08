@@ -10,14 +10,17 @@ from cryptography.fernet import Fernet
 
 class UserBank(object):
     def __init__(self, username, password):
-        self.username = username
-        self.password = password
         self.salt = None
         self.user_id = None
         self.created = None
+        self.username = username
+        self.password = self.password_hash(password)
         
-    def password_hash(self):
-        password = Hashing(self.password).hash_password()
+    def __str__(self):
+        return f"{self.username} {self.password} {self.salt}"
+        
+    def password_hash(self, password):
+        password = Hashing(password).hash_password()
         password, self.salt = Salting(password).salt()
         return Hashing(password).hash_password()
     
@@ -66,10 +69,11 @@ class Database(metaclass=MetaSingleton):
     
     def save_account(self, username, password, salt):
         """ Saves the account to the database. """
-        user_id = 0
+        user_id = self.cursor.execute(f"SELECT MAX(user_id) FROM {self.table_name}").fetchone()[0] + 1
         created = self.time
-        self.cursor.execute("INSERT INTO {self.table_name} (user_id, username, password, salt, created) VALUES(?,?,?,?,?)", (user_id, username, password, salt, created))
+        self.cursor.execute(f"INSERT INTO {self.table_name} (user_id, username, password, salt, created) VALUES(?,?,?,?,?)", (user_id, username, password, salt, created))
         self.connection.commit()
+        print(f"Account {username} created successfully!")
 
 
 class Hashing(object):
@@ -170,8 +174,5 @@ class Encryption(object):
 if __name__ == "__main__":
     username = "Username"
     password = "Password"
-    user = UserBank(username, password)
-    
-    print(user.password_hash())
-    
+    UserBank(username, password).save_user()
     
