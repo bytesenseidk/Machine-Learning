@@ -23,47 +23,30 @@ class MetaSingleton(type):
 class Database(metaclass=MetaSingleton):
     connection = None
     def __init__(self):
-        """ Changes directory to script_path, creates a connection to the database if it exists, if not, it creates a new database.
-        Creates a single table inside your database file called 'Table_1' if it dosen't exists already."""
         os.chdir(os.path.dirname(os.path.realpath(__file__)))
         self.cursor, self.connection = self.connect()
-        
-        self.table_name = "Table_1"
+        self.table_name = "Users"
         self.time = str(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
-        
-        self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {self.table_name} (column_1 TEXT, column_2 INT, column_3 REAL)")
-        
+        self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {self.table_name} (user_id int, username TEXT, password TEXT, pepper TEXT, created TEXT)")
         
     def connect(self):
         """ Makes sure to make a connection to the database, if no connection is active. """
         if self.connection is None:
-            self.connection = sqlite3.connect("Database_file.db")
+            self.connection = sqlite3.connect("UserBank.db")
             self.cursor = self.connection.cursor()
         return self.cursor, self.connection
     
-    def get_account(self):
+    def get_account(self, username):
         """ Fetches the account from the database. """
-        pass
+        self.cursor.execute(f"SELECT * FROM {self.table_name} WHERE username = ?", (username,))
+        print(self.cursor.fetchall())
     
-    def save_account(self):
+    def save_account(self, username, password, pepper):
         """ Saves the account to the database. """
-        pass
-    
-    
-    def insert_data(self):
-        """ Inserts data into our table. """
-        column_1 = self.time
-        column_2 = 45
-        column_3 = 45.77
-        self.cursor.execute(f"INSERT INTO {self.table_name} (column_1, column_2, column_3) VALUES(?,?,?)", (column_1, column_2, column_3))
+        user_id = 0
+        created = self.time
+        self.cursor.execute("INSERT INTO {self.table_name} (user_id, username, password, pepper, created) VALUES(?,?,?,?,?)", (user_id, username, password, pepper, created))
         self.connection.commit()
-
-        
-    def read_data(self):
-        """ Reads data from our table. """
-        self.cursor.execute(f"SELECT * FROM {self.table_name}")
-        for row in self.cursor.fetchall():
-            print(row)
 
 
 class Hashing(object):
