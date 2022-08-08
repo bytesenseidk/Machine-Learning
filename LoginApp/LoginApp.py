@@ -47,7 +47,6 @@ class LoginScreen(QMainWindow, Navigations):
         username = self.username_input.text()
         password = self.password_input.text()
         user_data = self.database.get_account(username)
-        print(user_data)
         try:
             if user_data["username"] == username and self.database.verify_password(user_data["password"], password):
                 self.welcome_page(username)
