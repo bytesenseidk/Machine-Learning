@@ -1,5 +1,6 @@
 import os
 import sys
+import string
 import random
 import sqlite3
 import datetime
@@ -8,8 +9,29 @@ from cryptography.fernet import Fernet
 
 
 class UserBank(object):
-    def __init__(self):
-        pass
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+        self.salt = None
+        self.user_id = None
+        self.created = None
+        
+    def password_hash(self):
+        password = Hashing(self.password).hash_password()
+        password, self.salt = Salting(password).salt()
+        return Hashing(password).hash_password()
+    
+    def user_object(self):
+        database = Database()
+        database.get_account(self.username)
+        database.cursor.close()
+        database.connection.close()
+    
+    def save_user(self):
+        database = Database()
+        database.save_account(self.username, self.password, self.salt)
+        database.cursor.close()
+        database.connection.close()
 
     
 class MetaSingleton(type):
@@ -28,7 +50,7 @@ class Database(metaclass=MetaSingleton):
         self.cursor, self.connection = self.connect()
         self.table_name = "Users"
         self.time = str(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
-        self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {self.table_name} (user_id int, username TEXT, password TEXT, pepper TEXT, created TEXT)")
+        self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {self.table_name} (user_id int, username TEXT, password TEXT, salt TEXT, created TEXT)")
         
     def connect(self):
         """ Makes sure to make a connection to the database, if no connection is active. """
@@ -42,11 +64,11 @@ class Database(metaclass=MetaSingleton):
         self.cursor.execute(f"SELECT * FROM {self.table_name} WHERE username = ?", (username,))
         print(self.cursor.fetchall())
     
-    def save_account(self, username, password, pepper):
+    def save_account(self, username, password, salt):
         """ Saves the account to the database. """
         user_id = 0
         created = self.time
-        self.cursor.execute("INSERT INTO {self.table_name} (user_id, username, password, pepper, created) VALUES(?,?,?,?,?)", (user_id, username, password, pepper, created))
+        self.cursor.execute("INSERT INTO {self.table_name} (user_id, username, password, salt, created) VALUES(?,?,?,?,?)", (user_id, username, password, salt, created))
         self.connection.commit()
 
 
@@ -67,17 +89,11 @@ class Hashing(object):
 class Salting(object):
     def __init__(self, password):
         self.password = password
-        
-    def generate_salt(self):
-        """ Generate a random salt. (Random set of characters) """
-        pass
     
     def salt(self):
-        """ 
-        Append salt to a hashed password.
-        Return the salted password.
-        """
-        pass
+        """ Append salt to a hashed password """
+        salt = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(16))
+        return self.password + salt, salt
 
 
 class Peppering(object):
@@ -152,5 +168,10 @@ class Encryption(object):
     
 
 if __name__ == "__main__":
-    temp = UserBank()
+    username = "Username"
+    password = "Password"
+    user = UserBank(username, password)
+    
+    print(user.password_hash())
+    
     
