@@ -1,40 +1,9 @@
 import os
-import sys
 import string
 import random
 import sqlite3
 import datetime
 from argon2 import PasswordHasher
-from cryptography.fernet import Fernet
-
-
-class UserBank(object):
-    def __init__(self, username, password):
-        self.salt = None
-        self.user_id = None
-        self.created = None
-        self.username = username
-        self.password = self.password_hash(password)
-        
-    def __str__(self):
-        return f"{self.username} {self.password} {self.salt}"
-        
-    def password_hash(self, password):
-        password = Hashing(password).hash_password()
-        password, self.salt = Salting(password).salt()
-        return Hashing(password).hash_password()
-    
-    def user_object(self):
-        database = Database()
-        database.get_account(self.username)
-        database.cursor.close()
-        database.connection.close()
-    
-    def save_user(self):
-        database = Database()
-        database.save_account(self.username, self.password, self.salt)
-        database.cursor.close()
-        database.connection.close()
 
     
 class MetaSingleton(type):
@@ -64,9 +33,18 @@ class Database(metaclass=MetaSingleton):
     
     def get_account(self, username):
         """ Fetches the account from the database. """
-        self.cursor.execute(f"SELECT * FROM {self.table_name} WHERE username = ?", (username,))
-        print(self.cursor.fetchall())
-    
+        try:
+            user_data = self.cursor.execute(f"SELECT * FROM {self.table_name} WHERE username = {username}").fetchone()
+            return user_data
+        except:
+            return False
+        
+        # self.cursor.execute(f"SELECT * FROM {self.table_name} WHERE username = {username}")
+        # if self.cursor.fetchone() is not None:
+        #     return self.cursor.fetchone()
+        # else:
+        #     return False
+        
     def save_account(self, username, password, salt):
         """ Saves the account to the database. """
         user_id = self.cursor.execute(f"SELECT MAX(user_id) FROM {self.table_name}").fetchone()[0] + 1
@@ -80,28 +58,17 @@ class Hashing(object):
     def __init__(self, password):
         self.password = password
         self.hasher = PasswordHasher()
-        
-    def hash_password(self):
-        """ Argon2 hash password """
-        return self.hasher.hash(self.password)
 
-    def verify_password(self, hashed_password):
+    def verify_password(self, salt, hashed_password):
         """ Compare new hashed password to old hashed password """
-        return self.hasher.verify(self.hash_password(), hashed_password)
-
-
-class Salting(object):
-    def __init__(self, password):
-        self.password = password
+        hashed_pass = self.hashing_process(salt)[0]
+        return self.hasher.verify(hashed_pass, hashed_password)
     
-    def salt(self):
-        """ Append salt to a hashed password """
-        salt = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(16))
-        return self.password + salt, salt
-    
-
-if __name__ == "__main__":
-    username = "Username"
-    password = "Password"
-    UserBank(username, password).save_user()
-    
+    def hashing_process(self, salt=None):
+        first_hash = self.hasher.hash(self.password)
+        if salt is None:
+            salt = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(16))
+            return [self.hasher.hash(first_hash + salt), salt]
+        else:
+            return [self.hasher.hash(first_hash + salt), salt]
+        
