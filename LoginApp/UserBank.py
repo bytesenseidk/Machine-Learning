@@ -6,11 +6,11 @@ import datetime
 from cryptography.fernet import Fernet
 
 
-class PasswordSecurity(object):
+class UserBank(object):
     def __init__(self):
         pass
-    
 
+    
 class MetaSingleton(type):
     """ Insures only a single connection to the database is available at the time. """
     _instances = {}
@@ -40,6 +40,14 @@ class Database(metaclass=MetaSingleton):
             self.connection = sqlite3.connect("Database_file.db")
             self.cursor = self.connection.cursor()
         return self.cursor, self.connection
+    
+    def get_account(self):
+        """ Fetches the account from the database. """
+        pass
+    
+    def save_account(self):
+        """ Saves the account to the database. """
+        pass
     
     
     def insert_data(self):
@@ -166,5 +174,5 @@ class Encryption(object):
     
 
 if __name__ == "__main__":
-    temp = PasswordSecurity()
+    temp = UserBank()
     
