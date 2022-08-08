@@ -99,21 +99,20 @@ class SignUpScreen(QMainWindow):
             
 if __name__ == "__main__":
     userlist = "users.txt"
-    if not os.path.exists(userlist):
-        with open(userlist, 'w'):
-            pass
-    user_file = Encrypt(userlist)
     try:
+        if not os.path.exists(userlist):
+            with open(userlist, 'w'):
+                pass
+        user_file = Encrypt(userlist)
         user_file.decryption()
     except:
         pass
-    app = QApplication(sys.argv)
-    screens = QtWidgets.QStackedWidget()
-    login_window = LoginScreen()
-    screens.addWidget(login_window)
-    screens.setFixedHeight(600)
-    screens.setFixedWidth(800)
-    screens.show()
-    if sys.exit(app.exec_()):
-        print("Exiting")
-        user_file.encryption()
+    finally:
+        app = QApplication(sys.argv)
+        login_window = LoginScreen()
+        screens = QtWidgets.QStackedWidget()
+        screens.addWidget(login_window)
+        screens.setFixedHeight(600)
+        screens.setFixedWidth(800)
+        screens.show()
+        sys.exit(app.exec_())
