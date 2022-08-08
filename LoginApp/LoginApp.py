@@ -18,29 +18,32 @@ class LoginScreen(QMainWindow):
     def login(self):
         username = self.username_input.text()
         password = self.password_input.text()
-        user_data = self.database.get_account(username) 
-        if user_data is not False:
-            account_data = {
-                "user_id": user_data[0],             
-                "username": user_data[1], 
-                "password": user_data[2], 
-                "salt": user_data[3], 
-                "created": user_data[4]
-                }
+        print(self.database.get_account(username))
+        
+        # user_data = self.database.get_account(username) 
+        # if user_data is not None:
+        #     print(f"User data: {user_data}")           
+        #     account_data = {
+        #         "user_id": user_data[0],             
+        #         "username": user_data[1], 
+        #         "password": user_data[2], 
+        #         "created": user_data[3]
+        #         }
             
-            hashed_password = Hashing(password).hashing_process(account_data["salt"])[0]
-            
-            if hashed_password[0] == account_data["password"]:
-                # self.closeDb()
-                self.close()
-                self.welcome_screen = WelcomeScreen(account_data["username"])
-                screens.addWidget(self.welcome_screen)
-                screens.setCurrentIndex(screens.currentIndex() + 1)
-            else:
-                self.feedback_label.setText("Incorrect password!")
-                print(f"{hashed_password}\n{account_data['password']}")
-        else:
-            self.feedback_label.setText("Invalid Username")    
+        #     try:
+        #         verified = self.database.verify_password(account_data["password"], password)
+        #         if verified:
+        #             self.close()
+        #             self.welcome_screen = WelcomeScreen(account_data["username"])
+        #             screens.addWidget(self.welcome_screen)
+        #             screens.setCurrentIndex(screens.currentIndex() + 1)    
+        #         else:
+        #             self.feedback_label.setText("Incorrect password!")
+        #     except Exception as e:
+        #         self.feedback_label.setText("Incorrect password!")
+        #         print(e)
+        # else:
+        #     self.feedback_label.setText("Invalid Username")    
     
     def sign_up(self):
         # self.closeDb()
@@ -99,11 +102,8 @@ class SignUpScreen(QMainWindow):
                 username = self.username_input.text()
                 password = self.password_input.text()
                 
-                hashed_password, salt = Hashing(password).hashing_process()
-                
-                
                 if self.database.get_account(username) is False:
-                    self.database.save_account(username, hashed_password, salt)
+                    self.database.save_account(username, password)
                     # self.closeDb()
                     self.close()
                     self.login_screen = LoginScreen()

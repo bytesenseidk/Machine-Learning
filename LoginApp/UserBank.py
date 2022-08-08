@@ -22,7 +22,8 @@ class Database(metaclass=MetaSingleton):
         self.cursor, self.connection = self.connect()
         self.table_name = "Users"
         self.time = str(datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
-        self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {self.table_name} (user_id int, username TEXT, password TEXT, salt TEXT, created TEXT)")
+        self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {self.table_name} (user_id int, username TEXT, password TEXT, created TEXT)")
+        self.hasher = PasswordHasher()
         
     def connect(self):
         """ Makes sure to make a connection to the database, if no connection is active. """
@@ -33,25 +34,30 @@ class Database(metaclass=MetaSingleton):
     
     def get_account(self, username):
         """ Fetches the account from the database. """
+        self.connection.commit()
         try:
-            user_data = self.cursor.execute(f"SELECT * FROM {self.table_name} WHERE username = {username}").fetchone()
-            return user_data
+            self.cursor.execute(f"SELECT * FROM {self.table_name} WHERE username = {username}")
+            if self.cursor.fetchone is not None:
+                return self.cursor.fetchone()
+            else:
+                return False
         except:
             return False
         
-        # self.cursor.execute(f"SELECT * FROM {self.table_name} WHERE username = {username}")
-        # if self.cursor.fetchone() is not None:
-        #     return self.cursor.fetchone()
-        # else:
-        #     return False
-        
-    def save_account(self, username, password, salt):
+    def save_account(self, username, password):
         """ Saves the account to the database. """
-        user_id = self.cursor.execute(f"SELECT MAX(user_id) FROM {self.table_name}").fetchone()[0] + 1
+        password = self.hasher.hash(password)
+        try:
+            user_id = self.cursor.execute(f"SELECT MAX(user_id) FROM {self.table_name}").fetchone()[0] + 1
+        except:
+            user_id = 0
         created = self.time
-        self.cursor.execute(f"INSERT INTO {self.table_name} (user_id, username, password, salt, created) VALUES(?,?,?,?,?)", (user_id, username, password, salt, created))
+        self.cursor.execute(f"INSERT INTO {self.table_name} (user_id, username, password, created) VALUES(?,?,?,?)", (user_id, username, password, created))
         self.connection.commit()
         print(f"Account {username} created successfully!")
+    
+    def verify_password(self, hashed_pass, password):
+        return self.hasher.verify(hashed_pass, password)
 
 
 class Hashing(object):
@@ -59,16 +65,24 @@ class Hashing(object):
         self.password = password
         self.hasher = PasswordHasher()
 
-    def verify_password(self, salt, hashed_password):
+    @staticmethod
+    def verify_password(hashed_pass_0, hashed_pass_1):
         """ Compare new hashed password to old hashed password """
-        hashed_pass = self.hashing_process(salt)[0]
-        return self.hasher.verify(hashed_pass, hashed_password)
+        print(f"Hashed password 0: {hashed_pass_0}")
+        print(f"Hashed password 1: {hashed_pass_1}")
+        return PasswordHasher().verify(hashed_pass_0, hashed_pass_1)
     
     def hashing_process(self, salt=None):
         first_hash = self.hasher.hash(self.password)
+        # print(f"First hash: {first_hash}")
         if salt is None:
             salt = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(16))
+            # print(f"Salted hash: {first_hash + salt}")
+            # print(f"Final hash: {self.hasher.hash(first_hash + salt)}")
             return [self.hasher.hash(first_hash + salt), salt]
         else:
             return [self.hasher.hash(first_hash + salt), salt]
-        
+
+if __name__ == "__main__":
+    db = Database()
+    print(db.get_account("test"))
