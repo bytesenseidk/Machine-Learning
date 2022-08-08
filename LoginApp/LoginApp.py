@@ -18,35 +18,16 @@ class LoginScreen(QMainWindow):
     def login(self):
         username = self.username_input.text()
         password = self.password_input.text()
-        print(self.database.get_account(username))
-        
-        # user_data = self.database.get_account(username) 
-        # if user_data is not None:
-        #     print(f"User data: {user_data}")           
-        #     account_data = {
-        #         "user_id": user_data[0],             
-        #         "username": user_data[1], 
-        #         "password": user_data[2], 
-        #         "created": user_data[3]
-        #         }
-            
-        #     try:
-        #         verified = self.database.verify_password(account_data["password"], password)
-        #         if verified:
-        #             self.close()
-        #             self.welcome_screen = WelcomeScreen(account_data["username"])
-        #             screens.addWidget(self.welcome_screen)
-        #             screens.setCurrentIndex(screens.currentIndex() + 1)    
-        #         else:
-        #             self.feedback_label.setText("Incorrect password!")
-        #     except Exception as e:
-        #         self.feedback_label.setText("Incorrect password!")
-        #         print(e)
-        # else:
-        #     self.feedback_label.setText("Invalid Username")    
+        user_data = self.database.get_account(username)
+        if user_data["username"] == username and self.database.verify_password(user_data["password"], password):
+            self.close()
+            self.welcome_screen = WelcomeScreen(username)
+            screens.addWidget(self.welcome_screen)
+            screens.setCurrentIndex(screens.currentIndex() + 1)
+        else:
+            self.feedback_label.setText("Invalid username or password")
     
     def sign_up(self):
-        # self.closeDb()
         self.close()
         self.signup_screen = SignUpScreen()
         screens.addWidget(self.signup_screen)
@@ -101,10 +82,9 @@ class SignUpScreen(QMainWindow):
             if self.password_input.text() == self.confirm_password_input.text():    
                 username = self.username_input.text()
                 password = self.password_input.text()
-                
-                if self.database.get_account(username) is False:
+                user_data = self.database.get_account(username)
+                if user_data["username"] is None:
                     self.database.save_account(username, password)
-                    # self.closeDb()
                     self.close()
                     self.login_screen = LoginScreen()
                     screens.addWidget(self.login_screen)
