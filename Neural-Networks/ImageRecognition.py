@@ -28,3 +28,4 @@ for i in range(5):
     plt.title(f"Prediction: {class_names[np.argmax(prediction[i])]}")
     plt.show()
     
+
