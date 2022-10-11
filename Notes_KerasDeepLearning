@@ -1,0 +1,89 @@
+===============[ DEEP LEARNING ]===============
+
+Chapter 1:
+    * Intro:
+        - Buzzwords:
+            - Machine Learning: 
+                - A subfield in AI where intelligence is induced without explicit programming.
+                - Can predict whether a student will pass or fail a test by learning from historical test results and student attributes. 
+                - The system is not encoded with a comprehensive list of all possible rules that can decide whether a student will pass or fail.
+                - The system learns on its own based on the patterns in it learned from the historical data.
+                - Works very well for a variety of problems, but fails to excel in some specific cases that seem very easy for humans (e.g classifications of images, sounds)
+                - Performs poorly with image and other unstructured data types.
+                - ML would not be able to improve performance with increased training data after a certain threshold.
+            - Deep Learning:
+                - A field within ML where intelligence is induced into systems without explicit programming using algorithms that have been inspired by the biological functioning of the human brain.
+                - We can leverage DL for all ML tasks and expect better performance, provided there was surplus data availability.
+                - DL became a ubiquitous field to solve predictive problems rather than just confined to areas of computer vision, speech and so on.
+                - Today we can leverage DL for almost all use cases that were earlier solved using ML and expect to outperform our previous achievements, provided that there is a surplus of data.
+                - DL is able to leverage the surplus data more effectively for improved performance.
+        
+        - Decomposing a DL Model:
+            - In its most basic form, DL models are designed using neural netowrk architecture.
+            - A neural network is a hierarchical organization of neurons with connections to other neurons.
+            - These neurons pass a message or signal to other neurons based on the received input and form a complex network that learns with some feedback mechanism.
+            - The input data is consumed by the neurons in the first hidden layer, which then provide an output to the next layer and so on, eventually resulting in the final output.
+            - Each layer can have one or many neurons, and each of them will compute a small function (e.g. activation function).
+            - The connection between two neurons of successive layers would have an associated weight.
+            - The weight defines the influence of the input to the output for the next neuron and eventually for the overall final output.
+            - In a neural network, the initial weights would all be random during the model training, but these weights are updated iteratively to learn to predict a correct output.
+            - Decomposing the network we can define few logical building blocks like neuron, layer, weight, input, output, an activation function inside the neuron to compute a learning process, and so on.
+            - Structure of a neural network example:
+                1. The input is consumed by neurons in the first layer and an activation function is calculated within each neuron.
+                2. Based on a simple rule, it forwards an output to the next neuron.
+                    2a. Similiar to the deviations learned by the human brain.
+                3. The larger the output of a neuron, the larger the significance of that input dimension will be.
+                4. These dimensions are then combined in the next layer to form additional new dimensions, which we probably cant make sense of.
+                5. The process, when multiplied several times, develops a complex network with several connections.
+            - Learning process of a neural network example:
+                1. When we provide the input data to the defined structure, the end output would be a prediction, which could be either correct or incorrect.
+                2. Based on the output, if we provide a feedback to the network to adapt better by using some means to make a better prediction, the system learns by updating the weight for the connections.
+                3. To achieve the process of providing feedback and defining the next step to make changs in the corect way, we use a beautiful mathematical algorithm called "Backpropagation".
+                4. Iterating the process several times step by step, with more and more date, helps the network update the weights appropriately to create a system where it can make a decision for predicting output based on the rules it has created for itself through the weights and connections.
+            - Building blocks in a DL model:
+                - Neurons, Activation Functions, Optimization Algorithms, Data Augmentation Tools, and so on..
+    
+    * Popular DL Frameworks:
+        - Low-Level DL Frameworks:
+            - Given the level of abstraction a framework provides, we can classify it as a low-level or high-level DL framework.
+            - While this is by no means industry-recognized terminology, we can use the segregation for a more intuitive understanding of the frameworks.
+            - Can be defined as the first level of abstraction of DL models.
+            - You would have to write fairly long codes and scripts to get your DL model ready (Although much less so than using just Python or C++).
+            - The advantage of using the first-level abstraction is the flexibility it provides in designing a model.
+            - Theano:
+                - One of the first DL libraries to gain popularity.
+                - Open source Python library
+            - Torch:
+                - Another popular ML and DL framework based on the Lua programming language.
+                - Improved by Facebook with a set of extension modules as open source software.
+            - PyTorch:
+                - Open source ML and DL library for Python.
+                - Developed by the Facebook AI research team.
+                - More popular than Torch, since basic Python skills can get you started developing DL models.
+                - PyTorch is far easier and transparrent to use for DL development versus Torch.
+            - MxNet:
+                - Pronounced "Mix-Net" and stands for both "Mix" and "Maximize".
+                - The idea was simplified to combine declarative and imperative programming together (mix) to maximize efficiency and productivity.
+                - It supports the use of multiple GPUs and is widely supported by major cloud providers like AWS and Azure.
+            - TensorFlow:
+                - Undoubtedly one of the most popular and widely used DL frameworks in the DL fraternity.
+                - It was developed and open sourced by Google and supports development across CPUs and GPUs, and mobile & edge devices as well.
+            - Aditional Frameworks:
+                - Caffe, Microsoft CNTK, Chainer, PaddlePaddle, and many more!
+        
+        - high-Level DL Frameworks:
+            - To simplify the process of DL models, we have frameworks that work on the seond level of abstraction.
+            - That is, rather than using the previously mentioned frameworks directly, we can use a new framework on top of an existing framework and thereby simplify DL model development further.
+            - The most popular high-level DL framework that provides a second level abstraction to Dl model development is Keras.
+            - Other frameworks like Gluon, Lasagne, and so on are also available, but Keras has been the most widely adopted one.
+                - Note:
+                    - Gluon works on top of MxNet.
+                    - Lasagne works on top of Theano.
+                    - Keras works on top of TensorFlow, Theano, MxNet & Microsoft CNTK.
+            - Keras:
+                - A high-level neural network API written in Python and can help you in developing a fully functional DL model with less than 15 mines of code.
+                - Since it is written in Python, it has a larger community of users and supporters and is extremely easy to get started with.
+                - The simplicity of Keras is that it helps users quickly develop DL models and provides a ton of flexibility while still being a high-level API.
+                - This really makes Keras a special framework to work with. Moreover, given that it supports several other frameworks as a back end, it adds the flexibility to leverage a different low-level API for a different use case if required.
+                - By far the most widely adopted usage of Keras is with TensorFlow as backend (i.e., Keras as a high-level DL API and TensorFlow as its low-level API back end).
+                - In a nutshell, the code you write in Keras gets converted to TensorFlow, which then runs on a compute instance.
