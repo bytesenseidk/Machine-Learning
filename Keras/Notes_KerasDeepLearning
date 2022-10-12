@@ -88,20 +88,31 @@
 - Logical Components:
     - Input Data: 
         - Input data for a DL algorithm can be of a variety of types.
-    - Tensor: 
-        - An n-dimensional matrix.
-        - Data of any form is finally represented as a homogeneous numeric matrix.
-        - Example; a 2-dimensional tensor:
-            - Each column represents one training sample.
-            - The entire matrix will be x samples.
-            * 2-dimensional tensor (m * n):
-                          |_1_|_5_|_3_|_1_|_1_|-\
-                          |_2_|_4_|_5_|_1_|_2_| |
-      1 training sample ->|_3_|_4_|_6_|_8_|_9_| | n rows
-                          |_4_|_5_|_5_|_6_|_7_| |
-                          |_6_|_9_|_1_|_6_|_9_|-/
-                          \                   /
-                           ---- m columns ----
+        - Tensor: 
+            - An n-dimensional matrix.
+            - Data of any form is finally represented as a homogeneous numeric matrix.
+            - Example; a 2-dimensional tensor:
+                - Each column represents one training sample.
+                - The entire matrix will be x samples.
+                * 2-dimensional tensor (m * n):
+                              |_1_|_5_|_3_|_1_|_1_|-\
+                              |_2_|_4_|_5_|_1_|_2_| |
+          1 training sample ->|_3_|_4_|_6_|_8_|_9_| | n rows
+                              |_4_|_5_|_5_|_6_|_7_| |
+                              |_6_|_9_|_1_|_6_|_9_|-/
+                              \                   /
+                               ---- m columns ----
 
-        - The training samples can also be represented reverse (i.e, each row could be one traing sample)
-        - 
+            - The training samples can also be represented reverse (i.e, each row could be one traing sample)
+            - In DL experiments, it is common notation to use one training sample in a column. Thus, m columns would denote m samples.
+            - Image Data:
+                - A single image is stored in data such as a 3-dimensional tensor where dimensions define the pixel values on a 2D plane and a third dimension defines the values for RGB color channels.
+                - Multiple images gets transformed into a 4-dimension tensor where the 4'th dimension will stack a 3D tensor image as a training sample.
+                - Example:
+                    - 100 images with a 512 x 512-pixel resolution, they will be represented as a 4D tensor with shape 512 x 512 x 3 x 100.
+        - It is a good practice to normalize, standardize, or scale the input values before training.
+        - Normalizing the values will bring all values in the input tensor into a 0-1 range, and standardization will bring the values into a range where the mean is 0 and the standard deviation is 1.
+        - This helps to reduce computation, as the learning improves by a great margin and so does performance, as the activation functions behave more appropriately.
+
+- Neuron:
+    - 
