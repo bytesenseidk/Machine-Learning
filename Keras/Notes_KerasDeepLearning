@@ -155,8 +155,22 @@
         - Because of the horizontal line with 0 as the output, we face serious issues sometimes.
         - For instance:
             - If the horizontal line is a constant with a derivative of 0, it may become a bottleneck during training, as the weights will not easily get updated.
-    
         - Leaky ReLU:
-            f(z) = z; when z > 0
-            f(z) = z
+            - To circumvent the horizontal line becoming a constant with a derivative of 0.
+            - The negative value outputs a slightly slanting line instead of a horizontal line.
+            - This helps in updating the weights through backpropagation effectively.
+            - f(z) = z; when z > 0
+            - f(z) = ~z; when z < 0 and where ~ is a parameter that is defined as a small constant, say 0.005
+            - python > keras.layers.LeakyReLU(X, alpha=0.0, max_value=None)
+            - We can directly ise the activation function by setting the value of alpha with a small constant.
+        
+        - A few other activation functions:
+            - tanh (hyperbolic tan activation)
+            - swish activation
+            - elu (exponential linear unit)
+            - selu (scaled elu)
+            ...
+
+- Model:
+    
 
