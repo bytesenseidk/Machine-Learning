@@ -12,6 +12,7 @@ labels = np.random.randint(2, size=(1000, 1)) # Dummy results for 1000 students 
 
 """ DEFINING MODEL STRUCTURE """
 model = Sequential()
+# Dense(<neurons>, input_dim=<input_neurons>, <activation_function>)
 model.add(Dense(5, input_dim=3, activation='relu'))
 model.add(Dense(4, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))

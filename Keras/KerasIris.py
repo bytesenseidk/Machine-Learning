@@ -14,9 +14,9 @@ labels = iris.target[indices[:-test_samples]]
 
 model = Sequential()
 model.add(Dense(5, input_dim=4, activation='relu'))
-model.add(Dense(4, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(10, activation='relu'))
+model.add(Dense(3, activation='relu'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-model.fit(train_data, labels, epochs=5, batch_size=32)
+model.fit(train_data, labels, epochs=10, batch_size=32)
 predictions = model.predict(test_data)

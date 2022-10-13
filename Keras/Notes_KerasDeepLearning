@@ -115,4 +115,24 @@
         - This helps to reduce computation, as the learning improves by a great margin and so does performance, as the activation functions behave more appropriately.
 
 - Neuron:
-    - 
+    - The core of a DNN, the neurons perform computations for an output.
+    - The neurons receives one or more inputs from the neurons in the previous layer.
+    - If the neurons are in the first hidden layer, they will receive the data from the input data stream.
+    - To map the functionality in a mathematical neuron, we need to have a function that operates on the sum of input multiplied by the corresponding weights f(z) and responds with an appropriate value based on the input.
+    - If a higher-influence input is received, the output should be higher, and vice versa.
+    - It is in a way analogous to the activation signal (i.e., higher influence -> then activate, otherwise deactivate).
+    - The function that works on the computed input data is called the activation function.
+
+- Activation Function:
+    - A function that takes the combined input z, applies a function to it, and passes the output value, thus trying to mimic the activate/deactivate function.
+    - The activation function therefore determines the state of a neuron by computing the activation function on the combined input. 
+    - Why do we need an activation function, instead of just passing the value of z as the final output?:
+        - 
+    - Sigmoid Activation Function:
+        - f(z) = 1 / (1+e^-z)
+    - ReLU Activation Function:
+        - f(z) = max(0,z)
+        - Leaky ReLU:
+             f(z) = z; when z > 0
+             f(z) = z
+
