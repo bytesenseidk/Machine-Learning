@@ -126,13 +126,37 @@
 - Activation Function:
     - A function that takes the combined input z, applies a function to it, and passes the output value, thus trying to mimic the activate/deactivate function.
     - The activation function therefore determines the state of a neuron by computing the activation function on the combined input. 
-    - Why do we need an activation function, instead of just passing the value of z as the final output?:
-        - 
+    - By computing the the output through an activation function, we avoid:
+        - The range of the output value would be -infinity to +infinity, with no clear way to define a threshold.
+        - The network won't really learn:
+            - Calculus:
+            - Derivatives:
+            - E.g., if the activation function is a linear function (basically no activation), the derivative of that function becomes 0; this becomes a big issue because training with the backpropagation algorithm helps give feedback to the network about wrong classifications and thereby helps a neuron to adjust its weights by using a derivative of the function.
+                - If that becomes 0, the network loses out on this learning ability.
+                - The output of just one layer would be similiar to having n layers.
+                - To keep things simple, we would always need a nonlinear activation function (at least in all hidden layers) to get the network to learn properly.
+
     - Sigmoid Activation Function:
         - f(z) = 1 / (1+e^-z)
+        - Renders output between 0 and 1.
+        - The nonlinear output of a sigmoid function improes the learning process very well, as it closely resembles the following principals:
+            - Lower influence = low output
+            - Higher influence = high output
+            - Confines the output between the 0 and 1 range.
+
     - ReLU Activation Function:
         - f(z) = max(0,z)
+        - If the output is positive it would output the same value, otherwise it would output 0.
+        - A valid nonlinear function.
+        - Works really well as an activation function.
+        - Improves the performance.
+        - Significantly reduce the number of computations during the training phase.
+        - This is a direct result of the 0 value in the output when z is negative, thereby deactivating the neuron.
+        - Because of the horizontal line with 0 as the output, we face serious issues sometimes.
+        - For instance:
+            - If the horizontal line is a constant with a derivative of 0, it may become a bottleneck during training, as the weights will not easily get updated.
+    
         - Leaky ReLU:
-             f(z) = z; when z > 0
-             f(z) = z
+            f(z) = z; when z > 0
+            f(z) = z
 
