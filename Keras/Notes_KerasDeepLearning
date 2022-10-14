@@ -134,12 +134,12 @@
             - E.g., if the activation function is a linear function (basically no activation), the derivative of that function becomes 0; this becomes a big issue because training with the backpropagation algorithm helps give feedback to the network about wrong classifications and thereby helps a neuron to adjust its weights by using a derivative of the function.
                 - If that becomes 0, the network loses out on this learning ability.
                 - The output of just one layer would be similiar to having n layers.
-                - To keep things simple, we would always need a nonlinear activation function (at least in all hidden layers) to get the network to learn properly.
+            - To keep things simple, we would always need a nonlinear activation function (at least in all hidden layers) to get the network to learn properly.
 
     - Sigmoid Activation Function:
         - f(z) = 1 / (1+e^-z)
         - Renders output between 0 and 1.
-        - The nonlinear output of a sigmoid function improes the learning process very well, as it closely resembles the following principals:
+        - The nonlinear output of a sigmoid function improves the learning process very well, as it closely resembles the following principals:
             - Lower influence = low output
             - Higher influence = high output
             - Confines the output between the 0 and 1 range.
@@ -152,17 +152,16 @@
         - Improves the performance.
         - Significantly reduce the number of computations during the training phase.
         - This is a direct result of the 0 value in the output when z is negative, thereby deactivating the neuron.
-        - Because of the horizontal line with 0 as the output, we face serious issues sometimes.
-        - For instance:
+        - Because of the horizontal line with 0 as the output, we face serious issues sometimes, for instance:
             - If the horizontal line is a constant with a derivative of 0, it may become a bottleneck during training, as the weights will not easily get updated.
         - Leaky ReLU:
             - To circumvent the horizontal line becoming a constant with a derivative of 0.
-            - The negative value outputs a slightly slanting line instead of a horizontal line.
+            - A negative value outputs a slightly slanting line instead of a horizontal line.
             - This helps in updating the weights through backpropagation effectively.
             - f(z) = z; when z > 0
             - f(z) = ~z; when z < 0 and where ~ is a parameter that is defined as a small constant, say 0.005
             - python > keras.layers.LeakyReLU(X, alpha=0.0, max_value=None)
-            - We can directly ise the activation function by setting the value of alpha with a small constant.
+            - We can directly use the activation function by setting the value of alpha with a small constant.
         
         - A few other activation functions:
             - tanh (hyperbolic tan activation)
@@ -172,5 +171,4 @@
             ...
 
 - Model:
-    
-
+    - 
