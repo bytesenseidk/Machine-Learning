@@ -171,4 +171,51 @@
             ...
 
 - Model:
-    - 
+    - The overall structure of a DNN is developed using the model object in Keras.
+    - This provides a simple way to create a stack of layers by adding new layers one after the other.
+    - The sequential model is the easiest way to define a model, which allows easy creation of a linear stack of layers.
+    - Example (Sequential model with 1 layer followed by an activation):
+        - The layer have 10 neurons and reveive input from 15 neurons and be activated with the ReLU activation function.
+            from keras.model import Sequential
+            from keras.layers import Dense, Activation
+
+            model = Sequential()
+            model.add(Dense(10, input_dim=15))
+            model.add(Activation('relu))
+
+
+- Layers:
+    - A layer in a DNN is defined as a group of neurons or a logically separated group in a hierarchical network structure.
+    - As DL became more and more popular, there were several experiments conducted with network architectures to improve performance for a variety of use cases.
+    - The use cases centered around regular supervised algorithms like classification and regression, computer vision experiments, extending DL for natural language processing and understanding, speech recognition and combinations of different domains.
+    - To simplify the model development process, Keras provides us with several types of layers and verious means to connect them.
+    - Core Layers:
+        - There are a few important layers that we will be using in mose use cases.
+    - Dense Layer:
+        - A dense layer is a regular DNN layer that connects every neuron in the defined leyer to every neuron in the previous layer, for instance:
+            - If layer 1 has 5 neurons and layer 2 (dense layer) has 3 neurons, the total number of connections between layer 1 and 2 would be 15 (5*3)
+            - Because it accommodates every possible connection between the layers, it is called a dense layer.
+            - Keras Dense Layer default parameters:
+                - keras.layers.Dense(units, activation=None, use_bias=True,
+                                     kernel_initializer='glorot_uniform',
+                                     bias_initializer='zeros',
+                                     kernel_regularizer=None,
+                                     bias_regularizer=None,
+                                     activity_regularizer=None,
+                                     kernel_constraint=None,
+                                     bias_constraint=None)
+            - It offers a lot of customization for any given layer.
+            - Most often, we just use parameters like units and activation.
+            - These additional parameters become important when we are working in specialized use cases where the importance of using specific types of constraints and initializers for a given layer is paramount.
+            - We also need to define the input shape for the Keras layer.
+            - The input shape needs to be defined for only the first layer.
+            - Subsequent layers just need the number of neurons defined.
+            - input_dim: define how many dimensions the input has, for instance:
+                - If we hace a table with 10 features and 1000 samples, we need to provide input_dim as 10 for the layer to understand the shape of input data.
+                - Example: 
+                    - A network with one hidden layer and the output layer for simple binary classifications.
+                    - Layer 1 has 5 neurons and expects an input with 10 features; therefore, input_dim=10.
+                    - The final layer is the output, which has one neuron.
+    - Dropout Layer:
+    - Other Important Layers:
+    
