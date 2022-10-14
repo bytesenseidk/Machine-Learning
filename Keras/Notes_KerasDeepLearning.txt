@@ -216,6 +216,9 @@
                     - A network with one hidden layer and the output layer for simple binary classifications.
                     - Layer 1 has 5 neurons and expects an input with 10 features; therefore, input_dim=10.
                     - The final layer is the output, which has one neuron.
+                        model = Sequential()
+                        model.add(Dense(5, input_dim=10, activation='sigmoid'))
+                        model.add(Dense(1, activation='sigmoid'))
     - Dropout Layer:
     - Other Important Layers:
     
