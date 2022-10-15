@@ -15,14 +15,17 @@ Neuron:
 
     Activation Function:
         - A function that operates on the sum of input multiplied by the corresponding weights.
-        - It applies a function to the input and returns the output value (Activate || Deactivate)
+        - It applies a function to the input and returns the output value
         - Responds with an appropriate value based on the input:
             - Returns higher output when higher-influence value is input and vise versa.
             - Higher-Influence -> Acvivate, else Deactivate
         - Denoted as: f(z)
         ! Constant with a derivative of 0:
-            - 
+            - Network will not be able to learn because the backpropagation uses the derivative to adjust its weights.
+            - If changing this value to 0, the network won't update / learn. 
+            - An example of this is a linear function (basically no activation)
         Functions:
+            - To avoid the "constant with a derivative of 0" issue, always choose a non-linear activation function for the hidden layers.
             Sigmoid:
                 - Defined as: 1 / (1 + e^-z)
                 - Renders output between 0 and 1.
@@ -42,7 +45,7 @@ Neuron:
                     keras.activations.relu(x, alpha=0.0, max_value=None)
 
             Leaky ReLU:
-            
+
     Model:
 
     Layers:
