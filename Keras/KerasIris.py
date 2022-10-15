@@ -16,7 +16,7 @@ model = Sequential()
 model.add(Dense(5, input_dim=4, activation='relu'))
 model.add(Dense(10, activation='relu'))
 model.add(Dense(3, activation='relu'))
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 model.fit(train_data, labels, epochs=10, batch_size=32)
 predictions = model.predict(test_data)

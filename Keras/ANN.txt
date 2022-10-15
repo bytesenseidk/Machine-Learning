@@ -1,0 +1,67 @@
+Input Data:
+    - Data the model is trained upon, images, values, etc..
+    - Data is interpreted as a tensor (n-dimensional matrix)
+    - For DL experiments, it is common practice to use one training sample for each column.
+    - It is good practice to normalize, standardize or scale the input values before training.
+        - Normalize: Converts every input values into a range of 0 to 1.
+        - Standardize: Convert every input value into a range where the mean is 0 and the standard deviation is 1.
+        - Scale: Only use part of the input data.
+
+Neuron:
+    - In overall a function that takes input and converts it into an output.
+    - The neuron receives one or more inputs from neurons in the previous layer.
+    - The neurons in the first hidden layer receive the data from the input data stream.
+    - Mimic the biological neuron, fireing or not fireing based on a higher-influence input.
+
+    Activation Function:
+        - A function that operates on the sum of input multiplied by the corresponding weights.
+        - It applies a function to the input and returns the output value (Activate || Deactivate)
+        - Responds with an appropriate value based on the input:
+            - Returns higher output when higher-influence value is input and vise versa.
+            - Higher-Influence -> Acvivate, else Deactivate
+        - Denoted as: f(z)
+        ! Constant with a derivative of 0:
+            - 
+        Functions:
+            Sigmoid:
+                - Defined as: 1 / (1 + e^-z)
+                - Renders output between 0 and 1.
+                - A non-linear(s-shaped) function.
+                - Improves learning process well because it closely resembles the higher-influence -> higher output principle.
+                - Python:
+                    import keras.activations.sigmoid
+                    sigmoid(x)
+            
+            ReLU (Rectified Linear Unit):
+                - Defined as: max(0,z);
+                    - If output is positive, output the value, else output 0.
+                - Renders output between 0 and 1.
+                - A valid non-linear function.
+                - By deactivating the neuron with any negative input, it reduces the computations needed dureing the training phase.
+                - Python:
+                    keras.activations.relu(x, alpha=0.0, max_value=None)
+
+            Leaky ReLU:
+            
+    Model:
+
+    Layers:
+        Core Layers:
+        Dense Layer:
+        Dropout Layer:
+        Other Layers:
+
+
+    Loss Function:
+        Binary cross-entropy:
+        Categorical cross-entropy:
+
+    Optimizers:
+        Stochastic Gradient Descent (SGD):
+        Adam:
+        Other Optimizers:
+
+Metrics:
+    Model Configuration:
+    Model Training:
+    Model Evaluation:
