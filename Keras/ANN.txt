@@ -54,7 +54,6 @@ Neuron:
         Dropout Layer:
         Other Layers:
 
-
     Loss Function:
         Binary cross-entropy:
         Categorical cross-entropy:
