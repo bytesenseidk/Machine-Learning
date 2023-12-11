@@ -4,6 +4,8 @@ Different projects made for learning.
 # Description
 *Some projects will need some cleaning,*
 *README will be updated as well.*
+## Single-Layered Neural Networks
+Go to files: [Single-Layered-ANN](https://github.com/bytesenseidk/Machine-Learning/tree/main/Single-Layerd-ANN)
 
 **LowLevel_SLNN.ipynp:**
 - Low level Single-Layer Neural Network
