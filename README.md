@@ -34,7 +34,8 @@ Go to files: [Single-Layered-ANN](https://github.com/bytesenseidk/Machine-Learni
 
 # Version History
 - 0.1:
-  * Initial build
-   
+    * Initial build
+- 0.1.1:
+    * Professionalize Project
 # Licence
 This project is licenced under the Mozilla Public License 2.0 - see the [LICENCE](https://github.com/LarsRosenkilde/MusicPlayer/blob/master/LICENCE) for details
