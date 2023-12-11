@@ -38,4 +38,4 @@ Go to files: [Single-Layered-ANN](https://github.com/bytesenseidk/Machine-Learni
 - 0.1.1:
     * Professionalize Project
 # Licence
-This project is licenced under the Mozilla Public License 2.0 - see the [LICENCE](https://github.com/bytesenseidk/Machine-Learning/blob/master/LICENCE) for details
+This project is licenced under the Mozilla Public License 2.0 - see the [LICENCE](https://github.com/bytesenseidk/Machine-Learning/blob/main/LICENCE) for details
