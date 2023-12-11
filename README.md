@@ -11,12 +11,12 @@ Go to files: [Single-Layered-ANN](https://github.com/bytesenseidk/Machine-Learni
 - Low level Single-Layer Neural Network
 - Mathematical Symbols used in equations
 - Learning Model Notes
-- Iris Speciec Prediction:
+- Iris Species Prediction:
 - Load & Process Dataset
 - Train & Predict Species
 - Accumulate Accuracies
 - Illustrate Species Distribution
-- **The Perceptron Training Model:**
+- **Perceptron Training Model:**
     - Fit-Method
     - Convergence
     - Convenience Function
@@ -25,7 +25,7 @@ Go to files: [Single-Layered-ANN](https://github.com/bytesenseidk/Machine-Learni
     - Gradient Descent
     - Cost Function
     - Feature Scaling
-    - Large-Scale Machine Learning 
+    - Large-Scale Machine-Learning 
     - Stochastic Gradient Descent
 ![Alt text](image-1.png)
 
@@ -38,4 +38,4 @@ Go to files: [Single-Layered-ANN](https://github.com/bytesenseidk/Machine-Learni
 - 0.1.1:
     * Professionalize Project
 # Licence
-This project is licenced under the Mozilla Public License 2.0 - see the [LICENCE](https://github.com/LarsRosenkilde/MusicPlayer/blob/master/LICENCE) for details
+This project is licenced under the Mozilla Public License 2.0 - see the [LICENCE](https://github.com/bytesenseidk/Machine-Learning/blob/master/LICENCE) for details
